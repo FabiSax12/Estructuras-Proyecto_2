@@ -1,0 +1,13 @@
+# ninja log v6
+3	318	7519620035630055	build.ninja	4fb18e8d12d5e453
+481	674	7517950184166027	Proyecto_2.exe	d544541bf8f2dda2
+37	1101	7517940456607743	CMakeFiles/Proyecto_2.dir/structures/Destination.cpp.obj	e134f53e8eaebc04
+53	947	7517940456773481	CMakeFiles/Proyecto_2.dir/structures/Prize.cpp.obj	b97f44623109e3d8
+71	1070	7517940456949539	CMakeFiles/Proyecto_2.dir/structures/Route.cpp.obj	fd0c8fbe2b6ffd3f
+37	1014	7517968547563197	CMakeFiles/Proyecto_2.dir/ui/queries.cpp.obj	9d7370638f8dc38e
+17	1139	7517968547362919	CMakeFiles/Proyecto_2.dir/main.cpp.obj	f467fb7fcc6be15f
+90	1884	7517940457139797	CMakeFiles/Proyecto_2.dir/structures/TravelGraph.cpp.obj	7c116321c8eafb66
+40	588	7517947224453352	CMakeFiles/Proyecto_2.dir/ui/data_management.cpp.obj	1a32ec354b20e63d
+75	1049	7517968547932863	CMakeFiles/Proyecto_2.dir/ui/reports.cpp.obj	3ae14890be209d5b
+20	480	7517950179565365	CMakeFiles/Proyecto_2.dir/ui/main_menu.cpp.obj	3a53734a9deab16f
+86	806	7517968548042869	CMakeFiles/Proyecto_2.dir/structures/SimpleList.cpp.obj	8d92739c4abe5067
