@@ -7,8 +7,6 @@
 
 using namespace std;
 
-std::vector<TransportMethod> parseTransportMethods(const std::string& input);
-
 void printPosibleRoute(TravelGraph &graph) {
 	std::string originCountry, originEntryPoint;
 	std::string destinationCountry, destinationEntryPoint;
@@ -42,9 +40,9 @@ void printPosibleRoute(TravelGraph &graph) {
 		return;
 	}
 };
-void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards);
-void printThreeMostFrecuentRoutes(TravelGraph &graph);
-void printRoutesTraveledOnce(TravelGraph &graph);
+void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards){};
+void printThreeMostFrecuentRoutes(TravelGraph &graph){};
+void printRoutesTraveledOnce(TravelGraph &graph){};
 
 void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {

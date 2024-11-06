@@ -172,9 +172,15 @@ CMakeFiles/Proyecto_2.dir/ui/main_menu.cpp.obj: \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/SimpleList.tpp \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/Trip.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/Enums.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_algorithm_defs.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/Reward.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/TravelGraph.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/Destination.h \
+ C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/Edge.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/EntryPoint.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/Route.h \
  C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/PromptInput.h \

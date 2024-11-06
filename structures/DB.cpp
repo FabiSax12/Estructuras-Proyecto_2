@@ -26,26 +26,6 @@ std::vector<std::string> split(const std::string& s, const std::string& delimite
 	return res;
 }
 
-std::string transportMethodToString(TransportMethod method) {
-	switch (method) {
-		case TransportMethod::PLANE:
-			return "Avion";
-		case TransportMethod::CAR:
-			return "Carro";
-		case TransportMethod::CRUISE:
-			return "Crucero";
-		default:
-			return "Desconocido";
-	}
-}
-
-TransportMethod stringToTransportMethod(const std::string& str) {
-	if (str == "Avión" || str == "Avion") return TransportMethod::PLANE;
-	if (str == "Carro") return TransportMethod::CAR;
-	if (str == "Crucero") return TransportMethod::CRUISE;
-	return TransportMethod::PLANE;
-}
-
 std::ifstream openFile(const std::string& filePath) {
 	std::ifstream file(filePath);
 	if (!file.is_open()) {

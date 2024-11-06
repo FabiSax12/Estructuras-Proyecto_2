@@ -172,8 +172,14 @@ CMakeFiles/Proyecto_2.dir/structures/DB.cpp.obj: \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\SimpleList.tpp \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\Trip.h \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\Enums.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_algorithm_defs.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\TravelGraph.h \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\Destination.h \
+ C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\Edge.h \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\EntryPoint.h \
  C:\Users\varga\OneDrive\ -\ Estudiantes\ ITCR\II\ Semestre\Estructuras\ de\ datos\Proyecto-2\structures\Route.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/fstream \
@@ -182,9 +188,6 @@ CMakeFiles/Proyecto_2.dir/structures/DB.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fstream.tcc \
  C:/Users/varga/ONEDRI~1/IISEME~1/ESTRUC~1/PROYEC~2/CMAKE-~2/VCPKG_~1/X64-MI~1/include/nlohmann/json.hpp \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/glue_algorithm_defs.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/pstl/execution_defs.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/stream_iterator.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory \
@@ -279,8 +282,6 @@ CMakeFiles/Proyecto_2.dir/structures/DB.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/locale_conv.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iomanip \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/quoted_string.h \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/sstream \
- C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/sstream.tcc \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/codecvt \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_dir.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fs_ops.h \
