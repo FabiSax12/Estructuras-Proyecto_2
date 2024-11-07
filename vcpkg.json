@@ -3,13 +3,13 @@
   "version-string" : "1.0.0",
   "builtin-baseline" : "2b43a78934980d8f1fd8f1a2b22865197c44cc16",
   "dependencies" : [ {
-    "name" : "nlohmann-json",
-    "version>=" : "3.11.3#1"
-  }, {
     "name" : "vcpkg-cmake-config",
     "version>=" : "2024-05-23"
   }, {
     "name" : "vcpkg-cmake",
     "version>=" : "2024-04-23"
+  }, {
+    "name" : "nlohmann-json",
+    "version>=" : "3.11.3#1"
   } ]
 }

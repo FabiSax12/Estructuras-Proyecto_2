@@ -36,5 +36,7 @@ add_executable(Proyecto_2 main.cpp
         structures/Edge.h
         structures/Edge.cpp
         structures/Edge.cpp
+        main.cpp
+        main.cpp
 )
 target_link_libraries(Proyecto_2 PRIVATE nlohmann_json::nlohmann_json)
