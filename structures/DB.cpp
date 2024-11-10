@@ -38,21 +38,17 @@ std::ifstream openFile(const std::string& filePath) {
 
 std::filesystem::path getProjectRoot() {
 	std::filesystem::path currentPath = std::filesystem::current_path();
-	std::cout << currentPath <<"...\n";
 	std::string buildDir = "cmake-build-debug";
-
 	if (currentPath.filename() == buildDir) {
 		currentPath = currentPath.parent_path();
 	}
-	std::cout << currentPath <<"...\n";
 	return currentPath;
 }
 
 json getHoleRoute(string filePath) {
 	std::filesystem::path projectRoot = getProjectRoot();
 	std::filesystem::path fullPath = projectRoot / filePath;
-	std::cout << "Esta es la ruta obtenida: " << fullPath << std::endl;
-
+	// std::cout << "Esta es la ruta obtenida: " << fullPath << std::endl;
 	json data;
 	std::ifstream file(fullPath);
 	file >> data;

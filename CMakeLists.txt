@@ -4,6 +4,8 @@ project(Proyecto_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++")
+
 find_package(nlohmann_json CONFIG REQUIRED)
 
 add_executable(Proyecto_2 main.cpp
@@ -38,5 +40,9 @@ add_executable(Proyecto_2 main.cpp
         structures/Edge.cpp
         main.cpp
         main.cpp
+        structures/ClientSerializer.h
+        structures/ClientSerializer.cpp
+        structures/TravelGraphSerializer.h
+        structures/TravelGraphSerializer.cpp
 )
 target_link_libraries(Proyecto_2 PRIVATE nlohmann_json::nlohmann_json)

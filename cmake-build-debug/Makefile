@@ -176,6 +176,30 @@ structures/Client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/Client.cpp.s
 .PHONY : structures/Client.cpp.s
 
+structures/ClientSerializer.obj: structures/ClientSerializer.cpp.obj
+.PHONY : structures/ClientSerializer.obj
+
+# target to build an object file
+structures/ClientSerializer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/ClientSerializer.cpp.obj
+.PHONY : structures/ClientSerializer.cpp.obj
+
+structures/ClientSerializer.i: structures/ClientSerializer.cpp.i
+.PHONY : structures/ClientSerializer.i
+
+# target to preprocess a source file
+structures/ClientSerializer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/ClientSerializer.cpp.i
+.PHONY : structures/ClientSerializer.cpp.i
+
+structures/ClientSerializer.s: structures/ClientSerializer.cpp.s
+.PHONY : structures/ClientSerializer.s
+
+# target to generate assembly for a file
+structures/ClientSerializer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/ClientSerializer.cpp.s
+.PHONY : structures/ClientSerializer.cpp.s
+
 structures/DB.obj: structures/DB.cpp.obj
 .PHONY : structures/DB.obj
 
@@ -344,6 +368,30 @@ structures/TravelGraph.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/TravelGraph.cpp.s
 .PHONY : structures/TravelGraph.cpp.s
 
+structures/TravelGraphSerializer.obj: structures/TravelGraphSerializer.cpp.obj
+.PHONY : structures/TravelGraphSerializer.obj
+
+# target to build an object file
+structures/TravelGraphSerializer.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.obj
+.PHONY : structures/TravelGraphSerializer.cpp.obj
+
+structures/TravelGraphSerializer.i: structures/TravelGraphSerializer.cpp.i
+.PHONY : structures/TravelGraphSerializer.i
+
+# target to preprocess a source file
+structures/TravelGraphSerializer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.i
+.PHONY : structures/TravelGraphSerializer.cpp.i
+
+structures/TravelGraphSerializer.s: structures/TravelGraphSerializer.cpp.s
+.PHONY : structures/TravelGraphSerializer.s
+
+# target to generate assembly for a file
+structures/TravelGraphSerializer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.s
+.PHONY : structures/TravelGraphSerializer.cpp.s
+
 structures/Trip.obj: structures/Trip.cpp.obj
 .PHONY : structures/Trip.obj
 
@@ -479,6 +527,9 @@ help:
 	@echo ... structures/Client.obj
 	@echo ... structures/Client.i
 	@echo ... structures/Client.s
+	@echo ... structures/ClientSerializer.obj
+	@echo ... structures/ClientSerializer.i
+	@echo ... structures/ClientSerializer.s
 	@echo ... structures/DB.obj
 	@echo ... structures/DB.i
 	@echo ... structures/DB.s
@@ -500,6 +551,9 @@ help:
 	@echo ... structures/TravelGraph.obj
 	@echo ... structures/TravelGraph.i
 	@echo ... structures/TravelGraph.s
+	@echo ... structures/TravelGraphSerializer.obj
+	@echo ... structures/TravelGraphSerializer.i
+	@echo ... structures/TravelGraphSerializer.s
 	@echo ... structures/Trip.obj
 	@echo ... structures/Trip.i
 	@echo ... structures/Trip.s

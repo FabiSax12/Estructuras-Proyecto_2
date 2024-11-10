@@ -114,6 +114,7 @@ void printNonVisitedDestinations(TravelGraph &graph, SimpleList<Client> &clients
 
 void reports(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
+		system("cls");
 		cout << "================== Gestion de Datos ==================\n";
 		cout << "1. Grafo en amplitud\n";
 		cout << "2. Grafo en profundidad\n";
@@ -129,15 +130,47 @@ void reports(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward>
 		cin >> option;
 
 		switch (option) {
-			case 1: amplitudeGraph(graph); break;
-			case 2: depthGraph(graph); break;
-			case 3: printRewards(rewards); break;
-			case 4: printClientsWithPoints(clients); break;
-			case 5: printClientsWithTrips(clients); break;
-			case 6: printClientsWithRewards(clients); break;
-			case 7: printNonVisitedDestinations(graph, clients); break;
-			case 8: return;
-			default: cout << "Opcion invalida. Intente de nuevo.\n";
+		    case 1:
+		        system("cls");
+		        amplitudeGraph(graph);
+		        system("pause");
+		        break;
+		    case 2:
+		        system("cls");
+		        depthGraph(graph);
+		        system("pause");
+		        break;
+		    case 3:
+		        system("cls");
+		        printRewards(rewards);
+		        system("pause");
+		        break;
+		    case 4:
+		        system("cls");
+		        printClientsWithPoints(clients);
+		        system("pause");
+		        break;
+		    case 5:
+		        system("cls");
+		        printClientsWithTrips(clients);
+		        system("pause");
+		        break;
+		    case 6:
+		        system("cls");
+		        printClientsWithRewards(clients);
+		        system("pause");
+		        break;
+		    case 7:
+		        system("cls");
+		        printNonVisitedDestinations(graph, clients);
+		        system("pause");
+		        break;
+		    case 8:
+		        return;
+		    default:
+		        cout << "Opción inválida. Intente de nuevo.\n";
+		        system("pause");
+		        break;
 		}
 	}
 }

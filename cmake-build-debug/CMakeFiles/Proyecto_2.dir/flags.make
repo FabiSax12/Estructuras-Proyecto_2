@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/Proyecto_2.dir/includes_CXX.rsp
 
-CXX_FLAGS = -g -fdiagnostics-color=always
+CXX_FLAGS =  -static-libgcc -static-libstdc++ -g -fdiagnostics-color=always
 

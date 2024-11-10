@@ -11,6 +11,7 @@
 #include "../structures/TravelGraph.h"
 
 int selectIndex(const std::string& listName, const std::string& listContent, int length);
+int selectOption(vector<string> list);
 void menu(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards);
 void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards);
 void reports(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards);
