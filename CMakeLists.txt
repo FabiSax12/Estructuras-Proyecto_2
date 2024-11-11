@@ -38,6 +38,8 @@ add_executable(Proyecto_2 main.cpp
         structures/Edge.h
         structures/Edge.cpp
         structures/Edge.cpp
+        structures/PathStep.h
+        structures/PathStep.cpp
         main.cpp
         main.cpp
         structures/ClientSerializer.h

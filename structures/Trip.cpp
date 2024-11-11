@@ -5,7 +5,6 @@
 #include "Trip.h"
 #include <iostream>
 #include <sstream>
-#include <utility>
 
 Trip::Trip(
         const string& originCountry, const string& originEntryPoint, const string& destinationCountry,
@@ -17,25 +16,24 @@ Trip::Trip(
       transportMethod(transportMethod),
       travelTime(travelTime),
       pointsEarned(0.0),
-      next(nullptr) {
+      next(nullptr){
     calculatePoints();
 }
 
-
 void Trip::calculatePoints() {
-    double factor = 0.0;
+    int factor;
     switch (transportMethod) {
         case TransportMethod::PLANE:
-            factor = 10.0;
-            break;
-        case TransportMethod::CAR:
-            factor = 5.0;
+            factor = 100;
             break;
         case TransportMethod::CRUISE:
-            factor = 8.0;
+            factor = 70;
+            break;
+        case TransportMethod::CAR:
+            factor = 25;
             break;
         default:
-            factor = 1.0;
+            factor = 1;
             break;
     }
     pointsEarned = travelTime * factor;

@@ -94,7 +94,6 @@ void DB::loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& gra
 	std::cout << "Destinos y rutas cargados correctamente desde JSON.\n";
 }
 
-
 void DB::loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& clients, SimpleList<Reward>& rewards) {
 	json data = getHoleRoute(filePath);
 
