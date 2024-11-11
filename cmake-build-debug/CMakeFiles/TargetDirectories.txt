@@ -1,3 +1,0 @@
-C:/Users/varga/OneDrive - Estudiantes ITCR/II Semestre/Estructuras de datos/Proyecto-2/cmake-build-debug/CMakeFiles/Proyecto_2.dir
-C:/Users/varga/OneDrive - Estudiantes ITCR/II Semestre/Estructuras de datos/Proyecto-2/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/varga/OneDrive - Estudiantes ITCR/II Semestre/Estructuras de datos/Proyecto-2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
