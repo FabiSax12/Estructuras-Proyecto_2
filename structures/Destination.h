@@ -17,10 +17,7 @@ struct Destination : public ListNode<Destination> {
 	Destination *next;
 
 	// Variables auxiliares para algoritmos
-	double distance;          // Usado para Dijkstra y otras búsquedas
 	bool visited;             // Marca si el destino ha sido visitado
-	Destination* previous;    // Puntero al destino anterior en la ruta
-	Edge* edgeToHere;         // Arista usada para llegar a este destino
 
 	Destination(const std::string &countryName, const std::string& entryPointName, EntryPoint *entryPoint);
 

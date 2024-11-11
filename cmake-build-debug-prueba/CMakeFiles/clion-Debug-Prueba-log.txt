@@ -20,6 +20,6 @@ For more information, see the docs here:
     https://json.nlohmann.me/api/macros/json_use_implicit_conversions/
 
 -- Running vcpkg install - done
--- Configuring done (8.8s)
+-- Configuring done (6.0s)
 -- Generating done (0.1s)
 -- Build files have been written to: C:/Users/varga/OneDrive - Estudiantes ITCR/II Semestre/Estructuras de datos/Proyecto-2/cmake-build-debug-prueba

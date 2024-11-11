@@ -272,6 +272,30 @@ structures/EntryPoint.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/EntryPoint.cpp.s
 .PHONY : structures/EntryPoint.cpp.s
 
+structures/PathStep.obj: structures/PathStep.cpp.obj
+.PHONY : structures/PathStep.obj
+
+# target to build an object file
+structures/PathStep.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj
+.PHONY : structures/PathStep.cpp.obj
+
+structures/PathStep.i: structures/PathStep.cpp.i
+.PHONY : structures/PathStep.i
+
+# target to preprocess a source file
+structures/PathStep.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.i
+.PHONY : structures/PathStep.cpp.i
+
+structures/PathStep.s: structures/PathStep.cpp.s
+.PHONY : structures/PathStep.s
+
+# target to generate assembly for a file
+structures/PathStep.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.s
+.PHONY : structures/PathStep.cpp.s
+
 structures/Reward.obj: structures/Reward.cpp.obj
 .PHONY : structures/Reward.obj
 
@@ -491,6 +515,9 @@ help:
 	@echo ... structures/EntryPoint.obj
 	@echo ... structures/EntryPoint.i
 	@echo ... structures/EntryPoint.s
+	@echo ... structures/PathStep.obj
+	@echo ... structures/PathStep.i
+	@echo ... structures/PathStep.s
 	@echo ... structures/Reward.obj
 	@echo ... structures/Reward.i
 	@echo ... structures/Reward.s

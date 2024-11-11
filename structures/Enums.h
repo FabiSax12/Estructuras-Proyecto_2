@@ -4,7 +4,10 @@
 
 #ifndef ENUMS_H
 #define ENUMS_H
+#include <algorithm>
 #include <string>
+#include <sstream>
+#include <vector>
 
 /**
  * @brief Defines types of entry points within a destination.
@@ -59,5 +62,37 @@ enum class TransportMethod {
 	CRUISE,
 	CAR
 };
+
+inline std::string transportMethodToString(const TransportMethod method) {
+	switch (method) {
+		case TransportMethod::PLANE:
+			return "Avion";
+		case TransportMethod::CAR:
+			return "Carro";
+		case TransportMethod::CRUISE:
+			return "Crucero";
+		default:
+			return "Desconocido";
+	}
+}
+
+inline TransportMethod stringToTransportMethod(const std::string& str) {
+	if (str == "Avión" || str == "Avion") return TransportMethod::PLANE;
+	if (str == "Carro") return TransportMethod::CAR;
+	if (str == "Crucero") return TransportMethod::CRUISE;
+	return TransportMethod::PLANE;
+}
+
+inline std::vector<TransportMethod> parseTransportMethods(const std::string& input) {
+	std::vector<TransportMethod> methods;
+	std::stringstream ss(input);
+	std::string methodStr;
+	while (std::getline(ss, methodStr, ',')) {
+		methodStr.erase(std::remove_if(methodStr.begin(), methodStr.end(), ::isspace), methodStr.end());
+		TransportMethod method = stringToTransportMethod(methodStr);
+		methods.push_back(method);
+	}
+	return methods;
+}
 
 #endif //ENUMS_H

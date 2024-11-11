@@ -278,6 +278,21 @@ CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\structures\Edge.cpp" -o CMakeFiles\Proyecto_2.dir\structures\Edge.cpp.s
 
+CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj: CMakeFiles/Proyecto_2.dir/flags.make
+CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj: CMakeFiles/Proyecto_2.dir/includes_CXX.rsp
+CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj: C:/Users/varga/OneDrive\ -\ Estudiantes\ ITCR/II\ Semestre/Estructuras\ de\ datos/Proyecto-2/structures/PathStep.cpp
+CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj: CMakeFiles/Proyecto_2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\cmake-build-debug-prueba\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj -MF CMakeFiles\Proyecto_2.dir\structures\PathStep.cpp.obj.d -o CMakeFiles\Proyecto_2.dir\structures\PathStep.cpp.obj -c "C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\structures\PathStep.cpp"
+
+CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\structures\PathStep.cpp" > CMakeFiles\Proyecto_2.dir\structures\PathStep.cpp.i
+
+CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.4\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\structures\PathStep.cpp" -o CMakeFiles\Proyecto_2.dir\structures\PathStep.cpp.s
+
 # Object files for target Proyecto_2
 Proyecto_2_OBJECTS = \
 "CMakeFiles/Proyecto_2.dir/main.cpp.obj" \
@@ -293,7 +308,8 @@ Proyecto_2_OBJECTS = \
 "CMakeFiles/Proyecto_2.dir/structures/DB.cpp.obj" \
 "CMakeFiles/Proyecto_2.dir/structures/EntryPoint.cpp.obj" \
 "CMakeFiles/Proyecto_2.dir/structures/Trip.cpp.obj" \
-"CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.obj"
+"CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.obj" \
+"CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj"
 
 # External object files for target Proyecto_2
 Proyecto_2_EXTERNAL_OBJECTS =
@@ -312,11 +328,12 @@ Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/DB.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/EntryPoint.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/Trip.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.obj
+Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/PathStep.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/build.make
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/linkLibs.rsp
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/objects1.rsp
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\cmake-build-debug-prueba\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Proyecto_2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\cmake-build-debug-prueba\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Proyecto_2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Proyecto_2.dir\link.txt --verbose=$(VERBOSE)
 	C:\Users\varga\AppData\Local\Microsoft\WindowsApps\pwsh.exe -noprofile -executionpolicy Bypass -file C:/Users/varga/.vcpkg-clion/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "C:/Users/varga/OneDrive - Estudiantes ITCR/II Semestre/Estructuras de datos/Proyecto-2/cmake-build-debug-prueba/Proyecto_2.exe" -installedDir "C:/Users/varga/OneDrive - Estudiantes ITCR/II Semestre/Estructuras de datos/Proyecto-2/cmake-build-debug-prueba/vcpkg_installed/x64-mingw-dynamic/debug/bin" -OutVariable out
 

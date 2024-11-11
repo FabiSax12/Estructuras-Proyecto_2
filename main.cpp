@@ -13,10 +13,6 @@ void loadInitialData(TravelGraph &graph, SimpleList<Client> &clients, SimpleList
 	DB::loadDestinationsAndRoutes(R"(C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\data\destinations.json)", graph);
 	DB::loadClientsAndRewards(R"(C:\Users\varga\OneDrive - Estudiantes ITCR\II Semestre\Estructuras de datos\Proyecto-2\data\clients.json)", clients, rewards);
 
-	rewards.add(Reward("Boleto de avion", 1000));
-	rewards.add(Reward("Descuento en hotel", 500));
-	rewards.add(Reward("Tour gratuito", 800));
-
 	std::cout << "Initial data loaded successfully.\n";
 }
 
