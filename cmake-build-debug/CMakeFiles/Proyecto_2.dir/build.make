@@ -308,6 +308,21 @@ CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.s"
 	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\structures\TravelGraphSerializer.cpp" -o CMakeFiles\Proyecto_2.dir\structures\TravelGraphSerializer.cpp.s
 
+CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj: CMakeFiles/Proyecto_2.dir/flags.make
+CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj: CMakeFiles/Proyecto_2.dir/includes_CXX.rsp
+CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj: C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/ListNode.cpp
+CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj: CMakeFiles/Proyecto_2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj -MF CMakeFiles\Proyecto_2.dir\structures\ListNode.cpp.obj.d -o CMakeFiles\Proyecto_2.dir\structures\ListNode.cpp.obj -c "C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\structures\ListNode.cpp"
+
+CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.i"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\structures\ListNode.cpp" > CMakeFiles\Proyecto_2.dir\structures\ListNode.cpp.i
+
+CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.s"
+	C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\structures\ListNode.cpp" -o CMakeFiles\Proyecto_2.dir\structures\ListNode.cpp.s
+
 # Object files for target Proyecto_2
 Proyecto_2_OBJECTS = \
 "CMakeFiles/Proyecto_2.dir/main.cpp.obj" \
@@ -325,7 +340,8 @@ Proyecto_2_OBJECTS = \
 "CMakeFiles/Proyecto_2.dir/structures/Trip.cpp.obj" \
 "CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.obj" \
 "CMakeFiles/Proyecto_2.dir/structures/ClientSerializer.cpp.obj" \
-"CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.obj"
+"CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.obj" \
+"CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj"
 
 # External object files for target Proyecto_2
 Proyecto_2_EXTERNAL_OBJECTS =
@@ -346,11 +362,12 @@ Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/Trip.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/ClientSerializer.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/TravelGraphSerializer.cpp.obj
+Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/build.make
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/linkLibs.rsp
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/objects1.rsp
 Proyecto_2.exe: CMakeFiles/Proyecto_2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable Proyecto_2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\salas\OneDrive - Estudiantes ITCR\IISemestre2024\Estructuras\Proyectos\Estructuras-Proyecto_2\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable Proyecto_2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Proyecto_2.dir\link.txt --verbose=$(VERBOSE)
 	C:\Users\salas\AppData\Local\Microsoft\WindowsApps\pwsh.exe -noprofile -executionpolicy Bypass -file C:/Users/salas/.vcpkg-clion/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "C:/Users/salas/OneDrive - Estudiantes ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/cmake-build-debug/Proyecto_2.exe" -installedDir "C:/Users/salas/OneDrive - Estudiantes ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/cmake-build-debug/vcpkg_installed/x64-windows/debug/bin" -OutVariable out
 

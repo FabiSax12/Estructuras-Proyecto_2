@@ -296,6 +296,30 @@ structures/EntryPoint.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/EntryPoint.cpp.s
 .PHONY : structures/EntryPoint.cpp.s
 
+structures/ListNode.obj: structures/ListNode.cpp.obj
+.PHONY : structures/ListNode.obj
+
+# target to build an object file
+structures/ListNode.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj
+.PHONY : structures/ListNode.cpp.obj
+
+structures/ListNode.i: structures/ListNode.cpp.i
+.PHONY : structures/ListNode.i
+
+# target to preprocess a source file
+structures/ListNode.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.i
+.PHONY : structures/ListNode.cpp.i
+
+structures/ListNode.s: structures/ListNode.cpp.s
+.PHONY : structures/ListNode.s
+
+# target to generate assembly for a file
+structures/ListNode.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Proyecto_2.dir\build.make CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.s
+.PHONY : structures/ListNode.cpp.s
+
 structures/Reward.obj: structures/Reward.cpp.obj
 .PHONY : structures/Reward.obj
 
@@ -542,6 +566,9 @@ help:
 	@echo ... structures/EntryPoint.obj
 	@echo ... structures/EntryPoint.i
 	@echo ... structures/EntryPoint.s
+	@echo ... structures/ListNode.obj
+	@echo ... structures/ListNode.i
+	@echo ... structures/ListNode.s
 	@echo ... structures/Reward.obj
 	@echo ... structures/Reward.i
 	@echo ... structures/Reward.s

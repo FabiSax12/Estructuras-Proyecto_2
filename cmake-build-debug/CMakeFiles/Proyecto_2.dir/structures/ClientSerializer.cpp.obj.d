@@ -302,8 +302,11 @@ CMakeFiles/Proyecto_2.dir/structures/ClientSerializer.cpp.obj: \
  C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/SimpleList.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/SimpleList.tpp \
- C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/Trip.h \
+ C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/Destination.h \
+ C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/Edge.h \
  C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/Enums.h \
+ C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/EntryPoint.h \
+ C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/Trip.h \
  C:/Users/salas/OneDrive\ -\ Estudiantes\ ITCR/IISemestre2024/Estructuras/Proyectos/Estructuras-Proyecto_2/structures/SimpleList.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/fstream \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \

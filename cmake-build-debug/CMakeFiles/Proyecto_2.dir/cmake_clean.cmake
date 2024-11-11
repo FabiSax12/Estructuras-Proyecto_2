@@ -13,6 +13,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Proyecto_2.dir/structures/Edge.cpp.obj.d"
   "CMakeFiles/Proyecto_2.dir/structures/EntryPoint.cpp.obj"
   "CMakeFiles/Proyecto_2.dir/structures/EntryPoint.cpp.obj.d"
+  "CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj"
+  "CMakeFiles/Proyecto_2.dir/structures/ListNode.cpp.obj.d"
   "CMakeFiles/Proyecto_2.dir/structures/Reward.cpp.obj"
   "CMakeFiles/Proyecto_2.dir/structures/Reward.cpp.obj.d"
   "CMakeFiles/Proyecto_2.dir/structures/Route.cpp.obj"
