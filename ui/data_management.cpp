@@ -1,9 +1,11 @@
 #include <iostream>
+#include <vector>
 #include "main_menu.h"
 #include "../structures/PromptInput.h"
 #include "../structures/TravelGraph.h"
 #include "../structures/Client.h"
 #include "../structures/Reward.h"
+#include "../structures/TravelGraphSerializer.h"
 
 using namespace std;
 
@@ -27,6 +29,7 @@ void addDestination(TravelGraph &graph) {
     else if (ep_typeIndex == 2) ep_type = EntryPointType::PORT;
 
     graph.addDestination(new Destination(countryName, ep_name, new EntryPoint(ep_type, ep_name)));
+    updateJSONDestinations(countryName, ep_name, ep_type,"../data/destinations.json");
 }
 
 
@@ -35,7 +38,15 @@ void deleteDestination(TravelGraph &graph) {
         cout << "No hay destinos para eliminar" << endl;
         return;
     }
-    const int index = selectIndex("Destinos: ", graph.destinations.toString(), graph.destinations.getLength());
+    vector<string> strDestinations;
+    for (Destination destination : graph.destinations) {
+        strDestinations.push_back("Pais: "+destination.name+" Destino: "+destination.entryPointName);
+        cout<<"Pais: "+destination.name+" Destino: "+destination.entryPointName<<endl;
+    }
+    cout<<endl;
+    int index=selectOption(strDestinations);
+    cout<<"En la lilsta de cadenas:"<<strDestinations[index]<<endl;
+    cout<<"En la lista de destinos:"<<graph.destinations.get(index)->entryPointName<<endl;
     graph.destinations.removeByIndex(index);
 }
 
@@ -84,8 +95,8 @@ void modifyRoute(TravelGraph &graph) {
 }
 
 void deleteRoute(TravelGraph &graph) {
-    // int index = selectIndex("Rutas:", graph.routes.toString([](const Route& node) { return node.origin->name; }), graph.routes.getLength());
-    // graph.routes.remove(graph.routes.get(index));
+    //int index = selectIndex("Rutas:", graph.destinations.toString([](const Route& node) { return node.origin->name; }), graph.routes.getLength());
+    //graph.destinations.remove(graph.destinations.get(index));
 }
 
 void addClient(SimpleList<Client> &clients) {
@@ -129,6 +140,7 @@ void deleteReward(SimpleList<Reward> &rewards) {
 // Menú principal de gestión de datos
 void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
     while (true) {
+        system("cls");
         cout << "================== Gestion de Datos ==================\n";
         cout << "1. Agregar destino\n";
         cout << "2. Eliminar destino\n";
@@ -148,19 +160,68 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
         cin >> option;
         
         switch (option) {
-            case 1: addDestination(graph); break;
-            case 2: deleteDestination(graph); break;
-            case 3: addRoute(graph); break;
-            case 4: modifyRoute(graph); break;
-            case 5: deleteRoute(graph); break;
-            case 6: addClient(clients); break;
-            case 7: deleteClient(clients); break;
-            case 8: findClient(clients); break;
-            case 9: addReward(rewards); break;
-            case 10: modifyReward(rewards); break;
-            case 11: deleteReward(rewards); break;
-            case 12: return;
-            default: cout << "Opcion inválida. Intente de nuevo.\n";
+            case 1:
+                system("cls");
+                addDestination(graph);
+		        system("pause");
+                break;
+            case 2:
+                system("cls");
+                deleteDestination(graph);
+		        system("pause");
+                break;
+            case 3:
+                system("cls");
+                addRoute(graph);
+		        system("pause");
+                break;
+            case 4:
+                system("cls");
+                modifyRoute(graph);
+		        system("pause");
+                break;
+            case 5:
+                system("cls");
+                deleteRoute(graph);
+		        system("pause");
+                break;
+            case 6:
+                system("cls");
+                addClient(clients);
+		        system("pause");
+                break;
+            case 7:
+                system("cls");
+                deleteClient(clients);
+		        system("pause");
+                break;
+            case 8:
+                system("cls");
+                findClient(clients);
+		        system("pause");
+                break;
+            case 9:
+                system("cls");
+                addReward(rewards);
+		        system("pause");
+                break;
+            case 10:
+                system("cls");
+                modifyReward(rewards);
+		        system("pause");
+                break;
+            case 11:
+                system("cls");
+                deleteReward(rewards);
+		        system("pause");
+                break;
+            case 12:
+                return;
+            default:
+                cout << "Opción inválida. Intente de nuevo.\n";
+                system("pause");
+            break;
         }
+
     }
 }

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <nlohmann/json.hpp>
+#include <filesystem>
 #include "TravelGraph.h"
 
 using namespace std;
@@ -35,9 +36,27 @@ std::ifstream openFile(const std::string& filePath) {
 	return file;
 }
 
-void DB::loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& graph) {
+std::filesystem::path getProjectRoot() {
+	std::filesystem::path currentPath = std::filesystem::current_path();
+	std::string buildDir = "cmake-build-debug";
+	if (currentPath.filename() == buildDir) {
+		currentPath = currentPath.parent_path();
+	}
+	return currentPath;
+}
+
+json getHoleRoute(string filePath) {
+	std::filesystem::path projectRoot = getProjectRoot();
+	std::filesystem::path fullPath = projectRoot / filePath;
+	// std::cout << "Esta es la ruta obtenida: " << fullPath << std::endl;
 	json data;
-	openFile(filePath) >> data;
+	std::ifstream file(fullPath);
+	file >> data;
+	return data;
+}
+
+void DB::loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& graph) {
+	json data = getHoleRoute(filePath);
 
 	for (const auto& country : data["paises"]) {
 		std::string countryName = country["nombre"];
@@ -76,8 +95,7 @@ void DB::loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& gra
 }
 
 void DB::loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& clients, SimpleList<Reward>& rewards) {
-	json data;
-	openFile(filePath) >> data;
+	json data = getHoleRoute(filePath);
 
 	for (const auto& rewardData : data["premiosDisponibles"]) {
 		std::string rewardName = rewardData["nombre"];

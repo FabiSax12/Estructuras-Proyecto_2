@@ -4,10 +4,12 @@
 
 #ifndef ENUMS_H
 #define ENUMS_H
-#include <algorithm>
+
+#include <vector>
 #include <string>
 #include <sstream>
-#include <vector>
+#include <algorithm>
+#include <cctype>
 
 /**
  * @brief Defines types of entry points within a destination.

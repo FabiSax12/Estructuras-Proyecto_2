@@ -220,6 +220,7 @@ void printRoutesTraveledOnce(TravelGraph &graph){};
 
 void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
+    system("cls");
 		cout << "================== Consultas ==================\n";
 		cout << "1. Rutas posibles de X a Y\n";
 		cout << "2. Canjear premios\n";
@@ -230,14 +231,33 @@ void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward>
 
 		int option;
 		cin >> option;
-
 		switch (option) {
-			case 1: printPosibleRoute(graph, clients); break;
-			case 2: printChooseReward(clients, rewards); break;
-			case 3: printThreeMostFrecuentRoutes(graph); break;
-			case 4: printRoutesTraveledOnce(graph); break;
-			case 5: return;
-			default: cout << "Opcion invalida. Intente de nuevo.\n";
+			case 1:
+				system("cls");
+				printPosibleRoute(graph);
+		        system("pause");
+				break;
+			case 2:
+				system("cls");
+				printChooseReward(clients, rewards);
+		        system("pause");
+				break;
+			case 3:
+				system("cls");
+				printThreeMostFrecuentRoutes(graph);
+		        system("pause");
+				break;
+			case 4:
+				system("cls");
+				printRoutesTraveledOnce(graph);
+		        system("pause");
+				break;
+			case 5:
+				return;
+			default:
+				cout << "Opción inválida. Intente de nuevo.\n";
+				system("pause");
+			break;
 		}
 	}
 }

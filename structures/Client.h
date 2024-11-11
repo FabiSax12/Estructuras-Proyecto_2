@@ -19,6 +19,9 @@ public:
 	[[nodiscard]] int getPoints() const;
 	void addTrip(const Trip& trip);
 	void addReward(const Reward& reward);
+	[[nodiscard]] const SimpleList<Trip>& getTrips() const;   // Devuelve una referencia constante a los viajes
+	[[nodiscard]] const SimpleList<Reward>& getRewards() const; // Devuelve una referencia constante a los premios
+
 
 	[[nodiscard]] std::string toString() const {
 		return "Cliente: " + name + ", Puntos acumulados: " + std::to_string(accumulatedPoints);

@@ -26,3 +26,11 @@ void Client::addReward(const Reward &reward) {
 	rewardsEarned->add(reward);
 	accumulatedPoints -= reward.pointsRequired;
 }
+
+const SimpleList<Trip>& Client::getTrips() const {
+	return *trips;
+}
+
+const SimpleList<Reward>& Client::getRewards() const {
+	return *rewardsEarned;
+}
