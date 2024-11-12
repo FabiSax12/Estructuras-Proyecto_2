@@ -40,7 +40,7 @@ void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
         Route* currentRoute = destination.routes;
         Route* prevRoute = nullptr;
         while(currentRoute != nullptr) {
-            if ((currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName)||(destination.name==destinationSearched->name)) {
+            if ((currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName)||(destination.name==destinationSearched->name&&destination.entryPointName==destinationSearched->entryPointName)) {
                 if (prevRoute == nullptr) {
                     destination.routes = currentRoute->next;
                 } else {
@@ -157,6 +157,8 @@ void addRoute(TravelGraph &graph) {
     else if (transportMethod == 2) tmType = TransportMethod::CRUISE;
 
     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
+    DB db;
+    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
 
 void modifyRoute(TravelGraph &graph) {
@@ -164,13 +166,14 @@ void modifyRoute(TravelGraph &graph) {
     cout << endl << " ================== Modificar ruta ==================" << endl;
     vector<string> strRoutes;
     vector<Route*> vctrRoutes;
+    cout<<"Rutas dispnibles: \n";
     for (Destination destination : graph.destinations) {
         Route* currentRoute = destination.routes;
-        cout<<"Rutas dispnibles: \n";
         while(currentRoute != nullptr) {
             strRoutes.push_back("ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") ");
             cout<<"\tORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") "<<endl;
             vctrRoutes.push_back(currentRoute);
+            currentRoute=currentRoute->next;
         }
     }cout<<endl;
     int index=selectOption(strRoutes);
@@ -198,7 +201,6 @@ void modifyRoute(TravelGraph &graph) {
                 else if (transportMethod == 1) tmType = TransportMethod::CAR;
                 else if (transportMethod == 2) tmType = TransportMethod::CRUISE;
                 if(graph.validateRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType)) {
-                    graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
                     if (prevRoute == nullptr) {
                         destination.routes = currentRoute->next;
                     } else {
@@ -207,6 +209,9 @@ void modifyRoute(TravelGraph &graph) {
                     Route* temp = currentRoute;
                     currentRoute = currentRoute->next;
                     delete temp;
+                    graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
+                    DB db;
+                    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
                 }
                 return;
             } else {
@@ -229,6 +234,7 @@ void deleteRoute(TravelGraph &graph) {
             strRoutes.push_back("ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") ");
             cout<<"ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") "<<endl;
             vctrRoutes.push_back(currentRoute);
+            currentRoute=currentRoute->next;
         }
     }cout<<endl;
     int index=selectOption(strRoutes);
@@ -247,6 +253,8 @@ void deleteRoute(TravelGraph &graph) {
                 Route* temp = currentRoute;
                 currentRoute = currentRoute->next;
                 delete temp;
+                DB db;
+                db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
                 return;
             } else {
                 tempIndex++;
@@ -257,18 +265,22 @@ void deleteRoute(TravelGraph &graph) {
     }
 }
 
-void addClient(SimpleList<Client> &clients) {
-    const auto name = promptInput<string>("Nombre del cliente:", true);
+void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
+    const auto name = promptInput<string>("Nombre del cliente:");
     clients.add(Client(name));
+    DB db;
+    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
 }
 
-void deleteClient(SimpleList<Client> &clients) {
+void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Clientes:", clients.toString(), clients.getLength());
     clients.remove(*clients.get(index));
+    DB db;
+    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
 }
 
-void findClient(SimpleList<Client> &clients) {
-    const auto name = promptInput<string>("Nombre del cliente:", true);
+void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
+    const auto name = promptInput<string>("Nombre del cliente:");
     for (auto &client : clients) {
         if (client.name == name) {
             cout << "Cliente encontrado: " << client.name << ", Puntos: " << client.getPoints() << endl;
@@ -278,21 +290,27 @@ void findClient(SimpleList<Client> &clients) {
     cout << "Cliente no encontrado." << endl;
 }
 
-void addReward(SimpleList<Reward> &rewards) {
-    const auto name = promptInput<string>("Nombre del premio:", true);
+void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
+    const auto name = promptInput<string>("Nombre del premio:");
     const auto points = promptInput<int>("Puntos requeridos para canjear el premio:");
     rewards.add(Reward(name, points));
+    DB db;
+    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
 }
 
-void modifyReward(SimpleList<Reward> &rewards) {
+void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
     auto reward = rewards.get(index);
     reward->pointsRequired = promptInput<int>("Nuevo número de puntos requeridos:");
+    DB db;
+    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
 }
 
-void deleteReward(SimpleList<Reward> &rewards) {
+void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
     rewards.remove(*rewards.get(index));
+    DB db;
+    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
 }
 
 // Menú principal de gestión de datos
@@ -346,32 +364,32 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
                 break;
             case 6:
                 system("cls");
-                addClient(clients);
+                addClient(clients,rewards);
 		        system("pause");
                 break;
             case 7:
                 system("cls");
-                deleteClient(clients);
+                deleteClient(clients,rewards);
 		        system("pause");
                 break;
             case 8:
                 system("cls");
-                findClient(clients);
+                findClient(clients,rewards);
 		        system("pause");
                 break;
             case 9:
                 system("cls");
-                addReward(rewards);
+                addReward(clients,rewards);
 		        system("pause");
                 break;
             case 10:
                 system("cls");
-                modifyReward(rewards);
+                modifyReward(clients,rewards);
 		        system("pause");
                 break;
             case 11:
                 system("cls");
-                deleteReward(rewards);
+                deleteReward(clients,rewards);
 		        system("pause");
                 break;
             case 12:
