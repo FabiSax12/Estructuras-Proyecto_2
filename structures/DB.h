@@ -22,7 +22,7 @@ public:
 
 private:
 	// Funciones auxiliares existentes
-	std::filesystem::path getProjectRoot();
+	 std::filesystem::path getProjectRoot();
 
 	// Funciones auxiliares para convertir enums a strings
 	[[nodiscard]]std::string entryPointTypeToString(EntryPointType type) const;

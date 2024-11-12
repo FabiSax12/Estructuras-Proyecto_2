@@ -8,6 +8,7 @@
 #include "../structures/Client.h"
 #include "../structures/Reward.h"
 #include "../structures/TravelGraphSerializer.h"
+#include "../structures/DB.h"
 
 using namespace std;
 
@@ -127,6 +128,8 @@ void deleteDestination(TravelGraph &graph) {
     cout<<"En la lista de destinos:"<<graph.destinations.get(index)->entryPointName<<endl;
     deleteRoutes(graph,graph.destinations.get(index));
     graph.destinations.removeByIndex(index);
+    DB db;
+    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
 
 void addRoute(TravelGraph &graph) {
@@ -155,7 +158,6 @@ void addRoute(TravelGraph &graph) {
 
     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
 }
-
 
 void modifyRoute(TravelGraph &graph) {
     system("cls");
