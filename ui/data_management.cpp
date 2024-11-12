@@ -40,7 +40,7 @@ void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
         Route* currentRoute = destination.routes;
         Route* prevRoute = nullptr;
         while(currentRoute != nullptr) {
-            if ((currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName)||(destination.name==destinationSearched->name)) {
+            if ((currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName)||(destination.name==destinationSearched->name&&destination.entryPointName==destinationSearched->entryPointName)) {
                 if (prevRoute == nullptr) {
                     destination.routes = currentRoute->next;
                 } else {
@@ -157,6 +157,8 @@ void addRoute(TravelGraph &graph) {
     else if (transportMethod == 2) tmType = TransportMethod::CRUISE;
 
     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
+    DB db;
+    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
 
 void modifyRoute(TravelGraph &graph) {
@@ -164,13 +166,14 @@ void modifyRoute(TravelGraph &graph) {
     cout << endl << " ================== Modificar ruta ==================" << endl;
     vector<string> strRoutes;
     vector<Route*> vctrRoutes;
+    cout<<"Rutas dispnibles: \n";
     for (Destination destination : graph.destinations) {
         Route* currentRoute = destination.routes;
-        cout<<"Rutas dispnibles: \n";
         while(currentRoute != nullptr) {
             strRoutes.push_back("ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") ");
             cout<<"\tORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") "<<endl;
             vctrRoutes.push_back(currentRoute);
+            currentRoute=currentRoute->next;
         }
     }cout<<endl;
     int index=selectOption(strRoutes);
@@ -198,7 +201,6 @@ void modifyRoute(TravelGraph &graph) {
                 else if (transportMethod == 1) tmType = TransportMethod::CAR;
                 else if (transportMethod == 2) tmType = TransportMethod::CRUISE;
                 if(graph.validateRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType)) {
-                    graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
                     if (prevRoute == nullptr) {
                         destination.routes = currentRoute->next;
                     } else {
@@ -207,6 +209,9 @@ void modifyRoute(TravelGraph &graph) {
                     Route* temp = currentRoute;
                     currentRoute = currentRoute->next;
                     delete temp;
+                    graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
+                    DB db;
+                    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
                 }
                 return;
             } else {
@@ -229,6 +234,7 @@ void deleteRoute(TravelGraph &graph) {
             strRoutes.push_back("ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") ");
             cout<<"ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") "<<endl;
             vctrRoutes.push_back(currentRoute);
+            currentRoute=currentRoute->next;
         }
     }cout<<endl;
     int index=selectOption(strRoutes);
@@ -247,6 +253,8 @@ void deleteRoute(TravelGraph &graph) {
                 Route* temp = currentRoute;
                 currentRoute = currentRoute->next;
                 delete temp;
+                DB db;
+                db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
                 return;
             } else {
                 tempIndex++;
