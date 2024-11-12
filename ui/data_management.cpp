@@ -55,6 +55,7 @@ void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
 }
 
 void showRoutes(TravelGraph &graph) {
+    system("cls");
     if (graph.destinations.getLength() < 1) {
         cout << "No hay destinos para mostrar" << endl;
         return;
@@ -70,15 +71,14 @@ void showRoutes(TravelGraph &graph) {
     Destination* destinationSearched = graph.destinations.get(index);
     for (Destination& destination : graph.destinations) {
         Route* currentRoute = destination.routes;
-        while(currentRoute != nullptr) {
-            if (currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName) {
+        if (currentRoute == nullptr) {cout <<"Lo sentimos, pero no hay destinos para mostrar" << endl;}
+        else if (destination.name == destinationSearched->name&&destination.entryPointName==destinationSearched->entryPointName) {
+            while(currentRoute != nullptr) {
                 cout<<"-------------------------------------------\n";
                 cout<<"\t Pais de Destino: "+currentRoute->destination->name+"\n";
                 cout<<"\t Punto de entrada: "+currentRoute->destination->entryPointName+"\n";
                 cout<<"\t Duracion del viaje: "+std::to_string(currentRoute->travelTime)+"\n";
                 cout<<"\t Medio de transporte: "+transportMethodToString(currentRoute->transportMethod)+"\n";
-                currentRoute = currentRoute->next;
-            } else {
                 currentRoute = currentRoute->next;
             }
         }
@@ -284,7 +284,8 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
         cout << "9. Agregar premio\n";
         cout << "10. Modificar premio\n";
         cout << "11. Eliminar premio\n";
-        cout << "12. Volver\n";
+        cout << "12. Mostrar rutas\n";
+        cout << "13. Volver\n";
         cout << "Seleccione una opcion: ";
         
         int option;
