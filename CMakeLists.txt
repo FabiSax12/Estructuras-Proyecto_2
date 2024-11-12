@@ -38,13 +38,16 @@ add_executable(Proyecto_2 main.cpp
         structures/Edge.h
         structures/Edge.cpp
         structures/Edge.cpp
-        structures/PathStep.h
-        structures/PathStep.cpp
         main.cpp
         main.cpp
         structures/ClientSerializer.h
         structures/ClientSerializer.cpp
         structures/TravelGraphSerializer.h
         structures/TravelGraphSerializer.cpp
+        main.cpp
+        main.cpp
+        structures/DB.cpp
+        structures/DB.cpp
+        structures/DB.cpp
 )
 target_link_libraries(Proyecto_2 PRIVATE nlohmann_json::nlohmann_json)

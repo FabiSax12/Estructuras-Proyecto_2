@@ -1,11 +1,14 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <cmath>  // Para std::floor
 #include "main_menu.h"
 #include "../structures/PromptInput.h"
 #include "../structures/TravelGraph.h"
 #include "../structures/Client.h"
 #include "../structures/Reward.h"
 #include "../structures/TravelGraphSerializer.h"
+#include "../structures/DB.h"
 
 using namespace std;
 
@@ -32,6 +35,81 @@ void addDestination(TravelGraph &graph) {
     updateJSONDestinations(countryName, ep_name, ep_type,"../data/destinations.json");
 }
 
+void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
+    for (Destination& destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        Route* prevRoute = nullptr;
+        while(currentRoute != nullptr) {
+            if ((currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName)||(destination.name==destinationSearched->name)) {
+                if (prevRoute == nullptr) {
+                    destination.routes = currentRoute->next;
+                } else {
+                    prevRoute->next = currentRoute->next;
+                }
+                Route* temp = currentRoute;
+                currentRoute = currentRoute->next;
+                delete temp;
+            } else {
+                prevRoute = currentRoute;
+                currentRoute = currentRoute->next;
+            }
+        }
+    }
+}
+
+void showRoutes(TravelGraph &graph) {
+    system("cls");
+    if (graph.destinations.getLength() < 1) {
+        cout << "No hay destinos para mostrar" << endl;
+        return;
+    }
+    vector<string> strDestinations;
+    for (Destination destination : graph.destinations) {
+        strDestinations.push_back("Destino: "+destination.entryPointName+" ("+destination.name+" )");
+        cout<<"Destino: "+destination.entryPointName+" ("+destination.name+" )\n";
+    }
+    cout<<endl;
+    int index=selectOption(strDestinations);
+    if (index==-1){return;}
+    Destination* destinationSearched = graph.destinations.get(index);
+    system("cls");
+    for (Destination& destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        if (destination.name == destinationSearched->name&&destination.entryPointName==destinationSearched->entryPointName) {
+            if (currentRoute == nullptr) {
+                cout <<"Lo sentimos, pero no hay destinos para mostrar" << endl;
+            }else {
+                cout<<"Rutas dispnibles: \n";
+                while(currentRoute != nullptr) {
+                    double time = currentRoute->travelTime;
+                    std::ostringstream stream;
+
+                    // Detectar cuántos decimales usar (0, 1 o 2)
+                    if (std::floor(time) == time) {
+                        // Número entero
+                        stream << std::fixed << std::setprecision(0) << time;
+                    } else if (std::round(time * 10) == time * 10) {
+                        // Un decimal significativo
+                        stream << std::fixed << std::setprecision(1) << time;
+                    } else {
+                        // Dos decimales significativos
+                        stream << std::fixed << std::setprecision(2) << time;
+                    }
+
+                    string timeString = stream.str();
+                    cout<<"======================================================\n";
+                    cout<<"\tPais de Destino: "+currentRoute->destination->name+"\n";
+                    cout<<"\tPunto de entrada: "+currentRoute->destination->entryPointName+"\n";
+                    cout<<"\tDuracion del viaje: "+timeString+" horas\n";
+                    cout<<currentRoute->travelTime<<endl;
+                    cout<<"\tMedio de transporte: "+transportMethodToString(currentRoute->transportMethod)+"\n";
+                    currentRoute = currentRoute->next;
+                }cout<<endl;
+            }
+
+        }
+    }
+}
 
 void deleteDestination(TravelGraph &graph) {
     if (graph.destinations.getLength() < 1) {
@@ -45,9 +123,13 @@ void deleteDestination(TravelGraph &graph) {
     }
     cout<<endl;
     int index=selectOption(strDestinations);
+    if (index==-1){return;}
     cout<<"En la lilsta de cadenas:"<<strDestinations[index]<<endl;
     cout<<"En la lista de destinos:"<<graph.destinations.get(index)->entryPointName<<endl;
+    deleteRoutes(graph,graph.destinations.get(index));
     graph.destinations.removeByIndex(index);
+    DB db;
+    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
 
 void addRoute(TravelGraph &graph) {
@@ -66,7 +148,7 @@ void addRoute(TravelGraph &graph) {
     cout << "Nombre del punto de entrada de destino: ";
     getline(cin, destEntryPoint);
 
-    const auto time = promptInput<int>("Tiempo de viaje: ");
+    const auto time = promptInput<double>("Tiempo de viaje: ");
     auto transportMethod = selectIndex("Metodos de transporte: ", "{ Avion, Carro, Barco }", 3);
 
     TransportMethod tmType;
@@ -77,26 +159,102 @@ void addRoute(TravelGraph &graph) {
     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
 }
 
-
 void modifyRoute(TravelGraph &graph) {
-    // cout << "Seleccione la ruta a modificar." << endl;
-    // int index = selectIndex(
-    //     "Rutas:",
-    //     graph.routes.toString([](const Route& node) { return node->origin->name; }),
-    //     graph.routes.getLength()
-    // );
-    //
-    // auto route = graph.routes.get(index);
-    // route->travelTime = promptInput<int>("Nuevo tiempo de viaje: ");
-    // auto newMethodIndex = selectIndex("Nuevo metodo de transporte:", "{Avion, Carro, Barco}", 3);
-    // route->transportMethod = (newMethodIndex == 0) ? TransportMethod::PLANE
-    //                    : (newMethodIndex == 1) ? TransportMethod::CAR
-    //                    : TransportMethod::CRUISE;
+    system("cls");
+    cout << endl << " ================== Modificar ruta ==================" << endl;
+    vector<string> strRoutes;
+    vector<Route*> vctrRoutes;
+    for (Destination destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        cout<<"Rutas dispnibles: \n";
+        while(currentRoute != nullptr) {
+            strRoutes.push_back("ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") ");
+            cout<<"\tORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") "<<endl;
+            vctrRoutes.push_back(currentRoute);
+        }
+    }cout<<endl;
+    int index=selectOption(strRoutes);
+    int tempIndex=0;
+    if (index==-1){return;}
+    for (Destination& destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        Route* prevRoute = nullptr;
+        while(currentRoute != nullptr) {
+            if (tempIndex == index) {
+                system("cls");
+                cout << endl << " ================== Modificar ruta ==================" << endl;
+                string originCountry = destination.name;
+                string originEntryPoint = destination.entryPointName;
+                string destCountry, destEntryPoint;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Nombre del nuevo pais de destino: ";
+                getline(cin, destCountry);
+                cout << "Nombre del nuevo punto de entrada de destino: ";
+                getline(cin, destEntryPoint);
+                const auto time = promptInput<double>("Tiempo de viaje: ");
+                auto transportMethod = selectIndex("Metodos de transporte: ", "{ Avion, Carro, Barco }", 3);
+                TransportMethod tmType;
+                if (transportMethod == 0) tmType = TransportMethod::PLANE;
+                else if (transportMethod == 1) tmType = TransportMethod::CAR;
+                else if (transportMethod == 2) tmType = TransportMethod::CRUISE;
+                if(graph.validateRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType)) {
+                    graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
+                    if (prevRoute == nullptr) {
+                        destination.routes = currentRoute->next;
+                    } else {
+                        prevRoute->next = currentRoute->next;
+                    }
+                    Route* temp = currentRoute;
+                    currentRoute = currentRoute->next;
+                    delete temp;
+                }
+                return;
+            } else {
+                prevRoute = currentRoute;
+                tempIndex++;
+                currentRoute = currentRoute->next;
+            }
+        }
+    }
 }
 
 void deleteRoute(TravelGraph &graph) {
-    //int index = selectIndex("Rutas:", graph.destinations.toString([](const Route& node) { return node.origin->name; }), graph.routes.getLength());
-    //graph.destinations.remove(graph.destinations.get(index));
+    system("cls");
+    cout << endl << " ================== Eliminar ruta ==================" << endl;
+    vector<string> strRoutes;
+    vector<Route*> vctrRoutes;
+    for (Destination destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        while(currentRoute != nullptr) {
+            strRoutes.push_back("ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") ");
+            cout<<"ORIGEN: "+destination.name+" ("+destination.entryPointName+") "+"DESTINO: "+currentRoute->destination->name+" ("+currentRoute->destination->entryPointName+") "<<endl;
+            vctrRoutes.push_back(currentRoute);
+        }
+    }cout<<endl;
+    int index=selectOption(strRoutes);
+    int tempIndex=0;
+    if (index==-1){return;}
+    for (Destination& destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        Route* prevRoute = nullptr;
+        while(currentRoute != nullptr) {
+            if (tempIndex == index) {
+                if (prevRoute == nullptr) {
+                    destination.routes = currentRoute->next;
+                } else {
+                    prevRoute->next = currentRoute->next;
+                }
+                Route* temp = currentRoute;
+                currentRoute = currentRoute->next;
+                delete temp;
+                return;
+            } else {
+                tempIndex++;
+                prevRoute = currentRoute;
+                currentRoute = currentRoute->next;
+            }
+        }
+    }
 }
 
 void addClient(SimpleList<Client> &clients) {
@@ -153,7 +311,8 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
         cout << "9. Agregar premio\n";
         cout << "10. Modificar premio\n";
         cout << "11. Eliminar premio\n";
-        cout << "12. Volver\n";
+        cout << "12. Mostrar rutas\n";
+        cout << "13. Volver\n";
         cout << "Seleccione una opcion: ";
         
         int option;
@@ -216,6 +375,11 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
 		        system("pause");
                 break;
             case 12:
+                system("cls");
+                showRoutes(graph);
+                system("pause");
+                break;
+            case 13:
                 return;
             default:
                 cout << "Opción inválida. Intente de nuevo.\n";

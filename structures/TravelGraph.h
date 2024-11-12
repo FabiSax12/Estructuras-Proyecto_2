@@ -17,6 +17,9 @@ struct TravelGraph {
 		const std::string& destCountry, const std::string& destEntryPoint,
 		double time, TransportMethod method
 	) const;
+	bool validateRoute(const std::string& originCountry, const std::string& originEntryPoint,
+						   const std::string& destCountry, const std::string& destEntryPoint,
+						   double time, TransportMethod method) const;
 	void amplitude() const;
 	void depth(Destination *start) const;
 	void startDepthTraversal() const;

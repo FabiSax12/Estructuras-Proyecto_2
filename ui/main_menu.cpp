@@ -44,7 +44,7 @@ int selectOption(vector<string> list) {
 		cout << "Destino a eliminar: " << strOpt <<endl;
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
-			return 0;
+			return -1;
 		} else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
 			opt++;
 			while (GetAsyncKeyState(VK_DOWN) & 0x8000) { Sleep(50); }/*Espera que se suelte la tecla*/

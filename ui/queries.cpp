@@ -234,7 +234,7 @@ void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward>
 		switch (option) {
 			case 1:
 				system("cls");
-				printPosibleRoute(graph);
+				printPosibleRoute(graph,clients);
 		        system("pause");
 				break;
 			case 2:

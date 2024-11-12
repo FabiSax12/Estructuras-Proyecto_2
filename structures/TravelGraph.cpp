@@ -45,12 +45,26 @@ void TravelGraph::addRoute(const std::string& originCountry, const std::string& 
     Destination* origin = findDestination(originCountry, originEntryPoint);
     Destination* destination = findDestination(destCountry, destEntryPoint);
 
-    if (origin && destination) {
+    if (origin && destination&&time>0) {
         Route* newRoute = new Route(destination, time, method);
         newRoute->next = origin->routes;
         origin->routes = newRoute;
     } else {
         std::cout << "Origen o destino no encontrado." << std::endl;
+    }
+}
+
+bool TravelGraph::validateRoute(const std::string& originCountry, const std::string& originEntryPoint,
+                           const std::string& destCountry, const std::string& destEntryPoint,
+                           double time, TransportMethod method) const {
+    Destination* origin = findDestination(originCountry, originEntryPoint);
+    Destination* destination = findDestination(destCountry, destEntryPoint);
+
+    if (origin && destination&&time>0) {
+        return true;
+    } else {
+        std::cout << "Origen o destino no encontrado o el tiempo tiene un formato incorrecto."<< std::endl;
+        return false;
     }
 }
 
