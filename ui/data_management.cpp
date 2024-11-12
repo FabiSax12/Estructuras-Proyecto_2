@@ -32,6 +32,29 @@ void addDestination(TravelGraph &graph) {
     updateJSONDestinations(countryName, ep_name, ep_type,"../data/destinations.json");
 }
 
+void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
+    for (Destination& destination : graph.destinations) {
+        Route* currentRoute = destination.routes;
+        Route* prevRoute = nullptr;
+        while(currentRoute != nullptr) {
+            if ((currentRoute->destination->name == destinationSearched->name&&currentRoute->destination->entryPointName==destinationSearched->entryPointName)||(destination.name==destinationSearched->name)) {
+                if (prevRoute == nullptr) {
+                    destination.routes = currentRoute->next;
+                } else {
+                    prevRoute->next = currentRoute->next;
+                }
+                Route* temp = currentRoute;
+                currentRoute = currentRoute->next;
+                delete temp;
+            } else {
+                prevRoute = currentRoute;
+                currentRoute = currentRoute->next;
+            }
+        }
+    }
+}
+
+void showRoutes(TravelGraph &graph) {}
 
 void deleteDestination(TravelGraph &graph) {
     if (graph.destinations.getLength() < 1) {
@@ -47,6 +70,7 @@ void deleteDestination(TravelGraph &graph) {
     int index=selectOption(strDestinations);
     cout<<"En la lilsta de cadenas:"<<strDestinations[index]<<endl;
     cout<<"En la lista de destinos:"<<graph.destinations.get(index)->entryPointName<<endl;
+    deleteRoutes(graph,graph.destinations.get(index));
     graph.destinations.removeByIndex(index);
 }
 
