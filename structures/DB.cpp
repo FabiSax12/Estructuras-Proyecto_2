@@ -81,7 +81,7 @@ void DB::loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& gra
 		std::string destinationCountry = route["destino"]["pais"];
 		std::string destinationEntryPoint = route["destino"]["punto_de_entrada"];
 		std::string transportMode = route["transporte"];
-		int travelTime = route["horas"];
+		double travelTime = route["horas"];
 
 		TransportMethod tm_type;
 		if (transportMode == "Avion" || transportMode == "Plane") tm_type = TransportMethod::PLANE;
@@ -141,4 +141,176 @@ void DB::loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& 
 	}
 }
 
+// Implementación de getProjectRoot (asumida existente)
+std::filesystem::path DB::getProjectRoot() {
+    std::filesystem::path currentPath = std::filesystem::current_path();
+    std::string buildDir = "cmake-build-debug";
+    if (currentPath.filename() == buildDir) {
+        currentPath = currentPath.parent_path();
+    }
+    return currentPath;
+}
 
+// Funciones auxiliares para convertir enums a strings
+std::string DB::entryPointTypeToString(EntryPointType type) const {
+    switch (type) {
+        case EntryPointType::AIRPORT:
+            return "Airport";
+        case EntryPointType::PORT:
+            return "Port";
+        case EntryPointType::BORDER:
+            return "Border";
+        default:
+            return "Unknown";
+    }
+}
+
+std::string DB::transportMethodToString(TransportMethod method) const {
+    switch (method) {
+        case TransportMethod::PLANE:
+            return "Avion";
+        case TransportMethod::CAR:
+            return "Carro";
+        case TransportMethod::CRUISE:
+            return "Crucero";
+        default:
+            return "Unknown";
+    }
+}
+
+void DB::saveDestinationsAndRoutes(const std::string& filePath, const TravelGraph& graph) {
+    json data;
+
+    // 1. Serializar "paises" y sus "puntos_de_entrada"
+    // Agrupar destinos por país
+    std::map<std::string, std::vector<const Destination*>> countriesMap;
+    for (const auto& dest : graph.destinations) {
+        countriesMap[dest.name].push_back(&dest);
+    }
+
+    for (const auto& [countryName, destinations] : countriesMap) {
+        json countryJson;
+        countryJson["nombre"] = countryName;
+
+        json entryPointsJson = json::array();
+        for (const auto& destination : destinations) {
+            json entryJson;
+            entryJson["nombre"] = destination->entryPointName;
+            entryJson["tipo"] = entryPointTypeToString(destination->entryPoint->type);
+            entryPointsJson.push_back(entryJson);
+        }
+
+        countryJson["puntos_de_entrada"] = entryPointsJson;
+        data["paises"].push_back(countryJson);
+    }
+
+    // 2. Serializar "rutas"
+    json routesJson = json::array();
+    for (const auto& dest : graph.destinations) {
+        const Route* route = dest.routes;
+        while (route != nullptr) {
+            json routeJson;
+            routeJson["origen"]["pais"] = dest.name;
+            routeJson["origen"]["punto_de_entrada"] = dest.entryPointName;
+            routeJson["destino"]["pais"] = route->destination->name;
+            routeJson["destino"]["punto_de_entrada"] = route->destination->entryPointName;
+            routeJson["transporte"] = transportMethodToString(route->transportMethod);
+            routeJson["horas"] = route->travelTime;
+
+            routesJson.push_back(routeJson);
+
+            route = route->next;
+        }
+    }
+    data["rutas"] = routesJson;
+
+    // 3. Escribir el JSON al archivo (sobrescribiendo)
+    try {
+        std::filesystem::path projectRoot = getProjectRoot();
+        std::filesystem::path fullPath = projectRoot / filePath;
+
+        std::ofstream file(fullPath);
+        if (!file.is_open()) {
+            throw std::runtime_error("Error abriendo el archivo para escribir: " + fullPath.string());
+        }
+
+        file << data.dump(4); // Formatear con 4 espacios de indentación
+        file.close();
+
+        std::cout << "Destinos y rutas guardados correctamente en JSON.\n";
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error al guardar destinos y rutas: " << e.what() << std::endl;
+    }
+}
+
+// DB.cpp (Continuación)
+
+void DB::saveClientsAndRewards(const std::string &filePath, const SimpleList<Client>& clients, const SimpleList<Reward>& rewards) {
+    json data;
+
+    // 1. Serializar "premiosDisponibles"
+    json rewardsJson = json::array();
+    for (const auto& reward : rewards) {
+        json rewardJson;
+        rewardJson["nombre"] = reward.name;
+        rewardJson["puntosRequeridos"] = reward.pointsRequired;
+        rewardsJson.push_back(rewardJson);
+    }
+    data["premiosDisponibles"] = rewardsJson;
+
+    // 2. Serializar "clientes"
+    json clientsJson = json::array();
+    for (const auto& client : clients) {
+        json clientJson;
+        clientJson["nombre"] = client.name;
+        clientJson["puntos"] = client.getPoints();
+
+        // 2.1. Serializar "viajes"
+        json tripsJson = json::array();
+        for (const auto& trip : client.getTrips()) {
+            json tripJson;
+            // Formato: "OrigenPais - OrigenPuntoDeEntrada"
+            tripJson["origen"] = trip.originCountry + " - " + trip.originEntryPoint;
+            // Formato: "DestinoPais - DestinoPuntoDeEntrada"
+            tripJson["destino"] = trip.destinationCountry + " - " + trip.destinationEntryPoint;
+            tripJson["transporte"] = transportMethodToString(trip.transportMethod);
+            tripJson["horas"] = trip.travelTime;
+
+            tripsJson.push_back(tripJson);
+        }
+        clientJson["viajes"] = tripsJson;
+
+        // 2.2. Serializar "premios" (premios utilizados por el cliente)
+        json usedRewardsJson = json::array();
+        for (const auto& usedReward : client.getRewards()) {
+            json usedRewardJson;
+            usedRewardJson["nombre"] = usedReward.name;
+            usedRewardJson["puntosUsados"] = usedReward.pointsRequired;
+            usedRewardsJson.push_back(usedRewardJson);
+        }
+        clientJson["premios"] = usedRewardsJson;
+
+        clientsJson.push_back(clientJson);
+    }
+    data["clientes"] = clientsJson;
+
+    // 3. Escribir el JSON al archivo (sobrescribiendo)
+    try {
+        std::filesystem::path projectRoot = getProjectRoot();
+        std::filesystem::path fullPath = projectRoot / filePath;
+
+        std::ofstream file(fullPath);
+        if (!file.is_open()) {
+            throw std::runtime_error("Error abriendo el archivo para escribir: " + fullPath.string());
+        }
+
+        file << data.dump(4); // Formatear con 4 espacios de indentación
+        file.close();
+
+        std::cout << "Clientes y premios guardados correctamente en JSON.\n";
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error al guardar clientes y premios: " << e.what() << std::endl;
+    }
+}

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <sstream>
+#include <cmath>  // Para std::floor
 #include "main_menu.h"
 #include "../structures/PromptInput.h"
 #include "../structures/TravelGraph.h"
@@ -69,18 +71,41 @@ void showRoutes(TravelGraph &graph) {
     int index=selectOption(strDestinations);
     if (index==-1){return;}
     Destination* destinationSearched = graph.destinations.get(index);
+    system("cls");
     for (Destination& destination : graph.destinations) {
         Route* currentRoute = destination.routes;
-        if (currentRoute == nullptr) {cout <<"Lo sentimos, pero no hay destinos para mostrar" << endl;}
-        else if (destination.name == destinationSearched->name&&destination.entryPointName==destinationSearched->entryPointName) {
-            while(currentRoute != nullptr) {
-                cout<<"-------------------------------------------\n";
-                cout<<"\t Pais de Destino: "+currentRoute->destination->name+"\n";
-                cout<<"\t Punto de entrada: "+currentRoute->destination->entryPointName+"\n";
-                cout<<"\t Duracion del viaje: "+std::to_string(currentRoute->travelTime)+"\n";
-                cout<<"\t Medio de transporte: "+transportMethodToString(currentRoute->transportMethod)+"\n";
-                currentRoute = currentRoute->next;
+        if (destination.name == destinationSearched->name&&destination.entryPointName==destinationSearched->entryPointName) {
+            if (currentRoute == nullptr) {
+                cout <<"Lo sentimos, pero no hay destinos para mostrar" << endl;
+            }else {
+                cout<<"Rutas dispnibles: \n";
+                while(currentRoute != nullptr) {
+                    double time = currentRoute->travelTime;
+                    std::ostringstream stream;
+
+                    // Detectar cuántos decimales usar (0, 1 o 2)
+                    if (std::floor(time) == time) {
+                        // Número entero
+                        stream << std::fixed << std::setprecision(0) << time;
+                    } else if (std::round(time * 10) == time * 10) {
+                        // Un decimal significativo
+                        stream << std::fixed << std::setprecision(1) << time;
+                    } else {
+                        // Dos decimales significativos
+                        stream << std::fixed << std::setprecision(2) << time;
+                    }
+
+                    string timeString = stream.str();
+                    cout<<"======================================================\n";
+                    cout<<"\tPais de Destino: "+currentRoute->destination->name+"\n";
+                    cout<<"\tPunto de entrada: "+currentRoute->destination->entryPointName+"\n";
+                    cout<<"\tDuracion del viaje: "+timeString+" horas\n";
+                    cout<<currentRoute->travelTime<<endl;
+                    cout<<"\tMedio de transporte: "+transportMethodToString(currentRoute->transportMethod)+"\n";
+                    currentRoute = currentRoute->next;
+                }cout<<endl;
             }
+
         }
     }
 }
@@ -120,7 +145,7 @@ void addRoute(TravelGraph &graph) {
     cout << "Nombre del punto de entrada de destino: ";
     getline(cin, destEntryPoint);
 
-    const auto time = promptInput<int>("Tiempo de viaje: ");
+    const auto time = promptInput<double>("Tiempo de viaje: ");
     auto transportMethod = selectIndex("Metodos de transporte: ", "{ Avion, Carro, Barco }", 3);
 
     TransportMethod tmType;
@@ -164,7 +189,7 @@ void modifyRoute(TravelGraph &graph) {
                 getline(cin, destCountry);
                 cout << "Nombre del nuevo punto de entrada de destino: ";
                 getline(cin, destEntryPoint);
-                const auto time = promptInput<int>("Tiempo de viaje: ");
+                const auto time = promptInput<double>("Tiempo de viaje: ");
                 auto transportMethod = selectIndex("Metodos de transporte: ", "{ Avion, Carro, Barco }", 3);
                 TransportMethod tmType;
                 if (transportMethod == 0) tmType = TransportMethod::PLANE;

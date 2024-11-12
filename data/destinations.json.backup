@@ -1,0 +1,284 @@
+{
+  "paises": [
+    {
+      "nombre": "USA",
+      "puntos_de_entrada": [
+        {
+          "nombre": "JFK Airport",
+          "tipo": "Airport"
+        },
+        {
+          "nombre": "Port of Miami",
+          "tipo": "Port"
+        },
+        {
+          "nombre": "Los Angeles Airport",
+          "tipo": "Airport"
+        }
+      ]
+    },
+    {
+      "nombre": "Mexico",
+      "puntos_de_entrada": [
+        {
+          "nombre": "Cancun Airport",
+          "tipo": "Airport"
+        },
+        {
+          "nombre": "Puerto Vallarta Port",
+          "tipo": "Port"
+        },
+        {
+          "nombre": "Tijuana Border",
+          "tipo": "Border"
+        }
+      ]
+    },
+    {
+      "nombre": "Canada",
+      "puntos_de_entrada": [
+        {
+          "nombre": "Toronto Airport",
+          "tipo": "Airport"
+        },
+        {
+          "nombre": "Vancouver Port",
+          "tipo": "Port"
+        },
+        {
+          "nombre": "Niagara Border",
+          "tipo": "Border"
+        }
+      ]
+    },
+    {
+      "nombre": "UK",
+      "puntos_de_entrada": [
+        {
+          "nombre": "Heathrow Airport",
+          "tipo": "Airport"
+        },
+        {
+          "nombre": "Liverpool Port",
+          "tipo": "Port"
+        }
+      ]
+    },
+    {
+      "nombre": "France",
+      "puntos_de_entrada": [
+        {
+          "nombre": "Charles de Gaulle Airport",
+          "tipo": "Airport"
+        },
+        {
+          "nombre": "Calais Port",
+          "tipo": "Port"
+        }
+      ]
+    },
+    {
+      "nombre": "Costa Rica",
+      "puntos_de_entrada": [
+        {
+          "nombre": "Aeropuerto Juan Santa Maria",
+          "tipo": "Airport"
+        }
+      ]
+    }
+  ],
+  "rutas": [
+    {
+      "destino": {
+        "pais": "Mexico",
+        "punto_de_entrada": "Cancun Airport"
+      },
+      "horas": 5,
+      "origen": {
+        "pais": "USA",
+        "punto_de_entrada": "JFK Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "Mexico",
+        "punto_de_entrada": "Puerto Vallarta Port"
+      },
+      "horas": 36,
+      "origen": {
+        "pais": "USA",
+        "punto_de_entrada": "Port of Miami"
+      },
+      "transporte": "Crucero"
+    },
+    {
+      "destino": {
+        "pais": "Canada",
+        "punto_de_entrada": "Vancouver Port"
+      },
+      "horas": 3,
+      "origen": {
+        "pais": "USA",
+        "punto_de_entrada": "Los Angeles Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "USA",
+        "punto_de_entrada": "Los Angeles Airport"
+      },
+      "horas": 4,
+      "origen": {
+        "pais": "Mexico",
+        "punto_de_entrada": "Tijuana Border"
+      },
+      "transporte": "Carro"
+    },
+    {
+      "destino": {
+        "pais": "USA",
+        "punto_de_entrada": "JFK Airport"
+      },
+      "horas": 7,
+      "origen": {
+        "pais": "Canada",
+        "punto_de_entrada": "Niagara Border"
+      },
+      "transporte": "Carro"
+    },
+    {
+      "destino": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
+      },
+      "horas": 1,
+      "origen": {
+        "pais": "UK",
+        "punto_de_entrada": "Heathrow Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "France",
+        "punto_de_entrada": "Calais Port"
+      },
+      "horas": 5,
+      "origen": {
+        "pais": "UK",
+        "punto_de_entrada": "Liverpool Port"
+      },
+      "transporte": "Crucero"
+    },
+    {
+      "destino": {
+        "pais": "UK",
+        "punto_de_entrada": "Liverpool Port"
+      },
+      "horas": 5,
+      "origen": {
+        "pais": "France",
+        "punto_de_entrada": "Calais Port"
+      },
+      "transporte": "Crucero"
+    },
+    {
+      "destino": {
+        "pais": "USA",
+        "punto_de_entrada": "JFK Airport"
+      },
+      "horas": 8,
+      "origen": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "UK",
+        "punto_de_entrada": "Heathrow Airport"
+      },
+      "horas": 7,
+      "origen": {
+        "pais": "Canada",
+        "punto_de_entrada": "Toronto Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
+      },
+      "horas": 10,
+      "origen": {
+        "pais": "Mexico",
+        "punto_de_entrada": "Cancun Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "UK",
+        "punto_de_entrada": "Heathrow Airport"
+      },
+      "horas": 11,
+      "origen": {
+        "pais": "USA",
+        "punto_de_entrada": "Los Angeles Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "Canada",
+        "punto_de_entrada": "Vancouver Port"
+      },
+      "horas": 48,
+      "origen": {
+        "pais": "Mexico",
+        "punto_de_entrada": "Puerto Vallarta Port"
+      },
+      "transporte": "Crucero"
+    },
+    {
+      "destino": {
+        "pais": "Canada",
+        "punto_de_entrada": "Toronto Airport"
+      },
+      "horas": 1.5,
+      "origen": {
+        "pais": "USA",
+        "punto_de_entrada": "JFK Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "Mexico",
+        "punto_de_entrada": "Tijuana Border"
+      },
+      "horas": 40,
+      "origen": {
+        "pais": "Canada",
+        "punto_de_entrada": "Niagara Border"
+      },
+      "transporte": "Carro"
+    },
+    {
+      "destino": {
+        "pais": "Canada",
+        "punto_de_entrada": "Toronto Airport"
+      },
+      "horas": 8,
+      "origen": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
+      },
+      "transporte": "Avion"
+    }
+  ]
+}
