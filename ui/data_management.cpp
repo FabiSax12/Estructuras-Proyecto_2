@@ -269,14 +269,14 @@ void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     const auto name = promptInput<string>("Nombre del cliente:");
     clients.add(Client(name));
     DB db;
-    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Clientes:", clients.toString(), clients.getLength());
     clients.remove(*clients.get(index));
     DB db;
-    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
@@ -295,7 +295,7 @@ void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     const auto points = promptInput<int>("Puntos requeridos para canjear el premio:");
     rewards.add(Reward(name, points));
     DB db;
-    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
@@ -303,14 +303,14 @@ void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     auto reward = rewards.get(index);
     reward->pointsRequired = promptInput<int>("Nuevo número de puntos requeridos:");
     DB db;
-    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
     rewards.remove(*rewards.get(index));
     DB db;
-    db.saveClientsAndRewards(R"(data\destinations.json)",clients,rewards);
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 // Menú principal de gestión de datos
