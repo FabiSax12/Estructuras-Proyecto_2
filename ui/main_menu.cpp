@@ -28,11 +28,12 @@ int selectIndex(const string& listName, const string& listContent, const int len
 	return promptInput<int>("Escoja mediante el indice (0 - " + to_string(length-1) + "): ");
 }
 
-int selectOption(vector<string> list) {
+int selectOption(vector<string> list,string defaultMessage,string selectionType) {
 	hideCursor();
 	int opt = 0;
 	string strOpt;
-	cout << "Selecciona el tipo de tarea:\n(Muevete con las flechas (up & down); presiona ESPACIO para seleccionar)\n";
+	cout << defaultMessage+":\n(Muevete con las flechas (up & down); presiona ESPACIO para seleccionar)\n";
+	cout << selectionType+":\n";
 	COORD posText = getCursorPosition(hConsole);/*Obtiene la posicion actual del cursor*/
 
 	bool selection = false;
@@ -41,7 +42,7 @@ int selectOption(vector<string> list) {
 		moveCursor(20, posText.Y, hConsole);        /*Mueve el cursor a una posicion en especifico*/
 		deleteLine(hConsole);                       /*Borra la linea actual en la consola*/
 		moveCursor(posText.X, posText.Y, hConsole);/*Vuelve a la posicion original del cursor*/
-		cout << "Destino a eliminar: " << strOpt <<endl;
+		cout << strOpt <<endl;
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
 			return -1;

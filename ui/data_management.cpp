@@ -264,13 +264,17 @@ void deleteRoute(TravelGraph &graph) {
 void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     const auto name = promptInput<string>("Nombre del cliente:");
     clients.add(Client(name));
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
+    DB db;
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Clientes:", clients.toString(), clients.getLength());
     clients.remove(*clients.get(index));
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
+    DB db;
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
@@ -288,20 +292,64 @@ void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     const auto name = promptInput<string>("Nombre del premio:");
     const auto points = promptInput<int>("Puntos requeridos para canjear el premio:");
     rewards.add(Reward(name, points));
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
+    DB db;
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
 }
 
 void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
+    if (rewards.getLength() == 0) {
+        cout<<"No hay premios disponibles\n";
+        return;
+    }
+    vector<string> strRewards;
+    Reward* currentReward = rewards.get(0);
+    while(currentReward != nullptr) {
+        strRewards.push_back("Premio: "+currentReward->name+" Puntos Requeridos: "+std::to_string(currentReward->pointsRequired));
+        cout<<"Premio: "+currentReward->name+" Puntos Requeridos: "+std::to_string(currentReward->pointsRequired)<<endl;
+        currentReward=currentReward->next;
+    }cout<<endl;
+    int index=selectOption(strRewards);
+    if (index==-1){return;}
     auto reward = rewards.get(index);
-    reward->pointsRequired = promptInput<int>("Nuevo número de puntos requeridos:");
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
+    string strName;
+    int points;
+    cout << "Nuevo nombre del premio: ";
+    getline(cin, strName);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    points = promptInput<int>("Nuevo numero de puntos requeridos: ");
+    if(points>0&&!strName.empty()) {
+        reward->name=strName;
+        reward->pointsRequired=points;
+        DB db;
+        db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+    }else {
+        cout<<"Error: Datos incorrectos!\n";
+    }
 }
 
 void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
+    if (rewards.getLength() == 0) {
+        cout<<"No hay premios disponibles\n";
+        return;
+    }
+    vector<string> strRewards;
+    Reward* currentReward = rewards.get(0);
+    while(currentReward != nullptr) {
+        strRewards.push_back("Premio: "+currentReward->name+" Puntos Requeridos: "+std::to_string(currentReward->pointsRequired));
+        cout<<"Premio: "+currentReward->name+" Puntos Requeridos: "+std::to_string(currentReward->pointsRequired)<<endl;
+        currentReward=currentReward->next;
+    }cout<<endl;
+    int index=selectOption(strRewards);
+    if (index==-1){return;}
+    //int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
     rewards.remove(*rewards.get(index));
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
+    DB db;
+    db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
 }
 
 // Menú principal de gestión de datos
@@ -391,7 +439,7 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
             case 13:
                 return;
             default:
-                cout << "Opción inválida. Intente de nuevo.\n";
+                cout << "Opcion invalida. Intente de nuevo.\n";
                 system("pause");
             break;
         }
