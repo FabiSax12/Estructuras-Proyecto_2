@@ -1,12 +1,6 @@
 {
   "clientes": [
     {
-      "nombre": "Maria Gomez",
-      "premios": [],
-      "puntos": 800,
-      "viajes": []
-    },
-    {
       "nombre": "Juan Perez",
       "premios": [
         {
@@ -23,16 +17,18 @@
           "transporte": "Avion"
         }
       ]
+    },
+    {
+      "nombre": "Maria Gomez",
+      "premios": [],
+      "puntos": 800,
+      "viajes": []
     }
   ],
   "premiosDisponibles": [
     {
       "nombre": "Descuento en hotel",
-      "puntosRequeridos": 500
-    },
-    {
-      "nombre": "Boleto de avion",
-      "puntosRequeridos": 1000
+      "puntosRequeridos": 45
     }
   ]
 }
