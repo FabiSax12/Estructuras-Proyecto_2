@@ -156,3 +156,29 @@ bool TravelGraph::routeExist(Destination *origin, const string& destinationEntry
     return false;
 }
 
+Route* TravelGraph::findRoute(
+    const std::string& originCountry, const std::string& originEntryPoint,
+    const std::string& destCountry, const std::string& destEntryPoint
+) const {
+    std::string originName = normalizeString(originCountry);
+    std::string originEntry = normalizeString(originEntryPoint);
+    std::string destName = normalizeString(destCountry);
+    std::string destEntry = normalizeString(destEntryPoint);
+
+    for (auto& dest : destinations) {
+        if (normalizeString(dest.name) == originName && normalizeString(dest.entryPointName) == originEntry) {
+            auto route = dest.routes;
+            while (route != nullptr) {
+                if (
+                    normalizeString(route->destination->name) == destName
+                    && normalizeString(route->destination->entryPointName) == destEntry
+                ) return route;
+
+                route = route->next;
+            }
+        }
+    }
+    return nullptr;
+}
+
+
