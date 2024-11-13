@@ -31,6 +31,15 @@ void addDestination(TravelGraph &graph) {
     else if (ep_typeIndex == 1) ep_type = EntryPointType::BORDER;
     else if (ep_typeIndex == 2) ep_type = EntryPointType::PORT;
 
+    ///////////////////////
+    for (Destination& destination : graph.destinations) {
+        if (destination.name == countryName&&destination.entryPointName==ep_name) {
+            cout <<"El destino ya existe en el grafo" << endl;
+            return;
+        }
+    }
+    ///////////////////////
+
     graph.addDestination(new Destination(countryName, ep_name, new EntryPoint(ep_type, ep_name)));
     updateJSONDestinations(countryName, ep_name, ep_type,"../data/destinations.json");
 }
@@ -101,7 +110,6 @@ void showRoutes(TravelGraph &graph) {
                     cout<<"\tPais de Destino: "+currentRoute->destination->name+"\n";
                     cout<<"\tPunto de entrada: "+currentRoute->destination->entryPointName+"\n";
                     cout<<"\tDuracion del viaje: "+timeString+" horas\n";
-                    cout<<currentRoute->travelTime<<endl;
                     cout<<"\tMedio de transporte: "+transportMethodToString(currentRoute->transportMethod)+"\n";
                     currentRoute = currentRoute->next;
                 }cout<<endl;
@@ -262,21 +270,41 @@ void deleteRoute(TravelGraph &graph) {
 }
 
 void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    const auto name = promptInput<string>("Nombre del cliente:");
-    clients.add(Client(name));
-
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+    cout << endl << " ================== Agregar cliente ==================" << endl;
+    string strName;
+    cout << "Nombre del cliente: ";
+    getline(cin, strName);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if(!strName.empty()) {
+        clients.add(Client(strName));
+        DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+    }else {
+        cout<<"Error: El nombre no puede estar vacio!\n";
+    }
 }
 
 void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    int index = selectIndex("Clientes:", clients.toString(), clients.getLength());
+    if (clients.getLength()== 0) {
+        cout<<"No hay clientes resgistrados\n";
+        return;
+    }
+    vector<string> strClients;
+    Client* currentClient = clients.get(0);
+    while(currentClient != nullptr) {
+        cout<<"Cliente: "+currentClient->name+" Puntos Acumulados: "+std::to_string(currentClient->accumulatedPoints)<<endl;
+        currentClient=currentClient->next;
+    }cout<<endl;
+    int index=selectOption(strClients);
+    if (index==-1){return;}
     clients.remove(*clients.get(index));
-
     DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
 
 void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    const auto name = promptInput<string>("Nombre del cliente:");
+    string name;
+    cout << "Nombre del cliente a buscar: ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, name);
     for (auto &client : clients) {
         if (client.name == name) {
             cout << "Cliente encontrado: " << client.name << ", Puntos: " << client.getPoints() << endl;
@@ -287,12 +315,18 @@ void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
 }
 
 void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    const auto name = promptInput<string>("Nombre del premio:");
-    const auto points = promptInput<int>("Puntos requeridos para canjear el premio:");
-    rewards.add(Reward(name, points));
-
-    DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
-
+    string strName;
+    int points;
+    cout << "Nombre del premio: ";
+    getline(cin, strName);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    points = promptInput<int>("Puntos requeridos para canjear el premio:: ");
+    if(points>0&&!strName.empty()) {
+        rewards.add(Reward(strName,points));
+        DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+    }else {
+        cout<<"Error: Datos incorrectos!\n";
+    }
 }
 
 void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
@@ -366,65 +400,74 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
         cout << "12. Mostrar rutas\n";
         cout << "13. Volver\n";
         cout << "Seleccione una opcion: ";
-        
+
         int option;
-        cin >> option;
-        
+        cin>>option;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Entrada no válida. Por favor, ingrese un número entre 1 y 4.\n";
+            system("pause");
+            continue;
+        }
+
+
         switch (option) {
             case 1:
                 system("cls");
                 addDestination(graph);
-		        system("pause");
+                system("pause");
                 break;
             case 2:
                 system("cls");
                 deleteDestination(graph);
-		        system("pause");
+                system("pause");
                 break;
             case 3:
                 system("cls");
                 addRoute(graph);
-		        system("pause");
+                system("pause");
                 break;
             case 4:
                 system("cls");
                 modifyRoute(graph);
-		        system("pause");
+                system("pause");
                 break;
             case 5:
                 system("cls");
                 deleteRoute(graph);
-		        system("pause");
+                system("pause");
                 break;
             case 6:
                 system("cls");
-                addClient(clients,rewards);
-		        system("pause");
+                addClient(clients, rewards);
+                system("pause");
                 break;
             case 7:
                 system("cls");
-                deleteClient(clients,rewards);
-		        system("pause");
+                deleteClient(clients, rewards);
+                system("pause");
                 break;
             case 8:
                 system("cls");
-                findClient(clients,rewards);
-		        system("pause");
+                findClient(clients, rewards);
+                system("pause");
                 break;
             case 9:
                 system("cls");
-                addReward(clients,rewards);
-		        system("pause");
+                addReward(clients, rewards);
+                system("pause");
                 break;
             case 10:
                 system("cls");
-                modifyReward(clients,rewards);
-		        system("pause");
+                modifyReward(clients, rewards);
+                system("pause");
                 break;
             case 11:
                 system("cls");
-                deleteReward(clients,rewards);
-		        system("pause");
+                deleteReward(clients, rewards);
+                system("pause");
                 break;
             case 12:
                 system("cls");
@@ -434,10 +477,9 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
             case 13:
                 return;
             default:
-                cout << "Opcion invalida. Intente de nuevo.\n";
+                cout << "Opción no válida. Por favor, elija un número entre 1 y 13.\n";
                 system("pause");
-            break;
+                break;
         }
-
     }
 }

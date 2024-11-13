@@ -32,7 +32,7 @@ int selectOption(vector<string> list,string defaultMessage,string selectionType)
 	hideCursor();
 	int opt = 0;
 	string strOpt;
-	cout << defaultMessage+":\n(Muevete con las flechas (up & down); presiona ESPACIO para seleccionar)\n";
+	cout << defaultMessage+":\n(Muevete con las flechas (up & down); presiona ESPACIO para seleccionar o ESC para salir)\n";
 	cout << selectionType+":\n";
 	COORD posText = getCursorPosition(hConsole);/*Obtiene la posicion actual del cursor*/
 
@@ -45,6 +45,7 @@ int selectOption(vector<string> list,string defaultMessage,string selectionType)
 		cout << strOpt <<endl;
 
 		if (GetAsyncKeyState(VK_ESCAPE) & 0x8000) {
+			showCursor();
 			return -1;
 		} else if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
 			opt++;
@@ -81,6 +82,14 @@ void menu(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &r
 
 		int option = 0;
 		cin >> option;
+
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Entrada no válida. Por favor, ingrese un número entre 1 y 4.\n";
+			system("pause");
+			continue;
+		}
 
 		switch (option) {
 			case 1:
