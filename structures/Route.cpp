@@ -5,6 +5,7 @@ Route::Route(Destination* dest, double time, TransportMethod method) {
 	this->destination = dest;
 	this->travelTime = time;
 	this->transportMethod = method;
+	this->traveledTimes = 0;
 	this->next = nullptr;
 }
 
