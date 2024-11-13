@@ -307,7 +307,20 @@ void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
 }
 
 void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
+    if (rewards.getLength() == 0) {
+        cout<<"No hay premios disponibles\n";
+        return;
+    }
+    vector<string> strRewards;
+    Reward* currentReward = rewards.get(0);
+    while(currentReward != nullptr) {
+        strRewards.push_back("Premio: "+currentReward->name+" Puntos Requeridos: "+std::to_string(currentReward->pointsRequired));
+        cout<<"Premio: "+currentReward->name+" Puntos Requeridos: "+std::to_string(currentReward->pointsRequired)<<endl;
+        currentReward=currentReward->next;
+    }cout<<endl;
+    int index=selectOption(strRewards);
+    if (index==-1){return;}
+    //int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
     rewards.remove(*rewards.get(index));
     DB db;
     db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
