@@ -11,7 +11,7 @@ using namespace std;
 
 void loadInitialData(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	DB::loadDestinationsAndRoutes(R"(data\destinations.json)", graph);
-	DB::loadClientsAndRewards(R"(data\clients.json)", clients, rewards);
+	DB::loadClientsAndRewards(R"(data\clients.json)", graph, clients, rewards);
 
 	std::cout << "Initial data loaded successfully.\n";
 }

@@ -15,18 +15,18 @@
 class DB {
 public:
 	static void loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& graph);
-	static void loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& clients, SimpleList<Reward>& rewards);
+	static void loadClientsAndRewards(const std::string &filePath, TravelGraph& graph, SimpleList<Client>& clients, SimpleList<Reward>& rewards);
 
-	void saveDestinationsAndRoutes(const std::string& filePath, const TravelGraph& graph);
-	void saveClientsAndRewards(const std::string &filePath, const SimpleList<Client>& clients, const SimpleList<Reward>& rewards);
+	static void saveDestinationsAndRoutes(const std::string& filePath, const TravelGraph& graph);
+	static void saveClientsAndRewards(const std::string &filePath, const SimpleList<Client>& clients, const SimpleList<Reward>& rewards);
 
-private:
+
 	// Funciones auxiliares existentes
-	 std::filesystem::path getProjectRoot();
-
+	 static std::filesystem::path getProjectRoot();
+private:
 	// Funciones auxiliares para convertir enums a strings
-	[[nodiscard]]std::string entryPointTypeToString(EntryPointType type) const;
-	[[nodiscard]]std::string transportMethodToString(TransportMethod method) const;
+	[[nodiscard]]static std::string entryPointTypeToString(EntryPointType type) ;
+	[[nodiscard]]static std::string transportMethodToString(TransportMethod method) ;
 };
 
 #endif //DB_H

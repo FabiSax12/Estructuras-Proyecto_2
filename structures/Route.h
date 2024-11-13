@@ -13,6 +13,7 @@ using namespace std;
 struct Route : public ListNode<Route>{
 	Destination *destination;
 	double travelTime;
+	int traveledTimes;
 	TransportMethod transportMethod;
 	Route *next;
 

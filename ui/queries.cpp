@@ -6,7 +6,9 @@
 #include <iostream>
 #include <unordered_set>
 #include <limits>
+#include <queue>
 
+#include "../structures/DB.h"
 #include "../structures/PathStep.h"
 
 using namespace std;
@@ -52,7 +54,7 @@ Client* findOrCreateClient(const string& name, SimpleList<Client>& clients) {
 	return clients.get(0);
 }
 
-void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients) {
+void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	string originCountry, originEntryPoint;
 	string destinationCountry, destinationEntryPoint;
 	string transportMethod1, transportMethod2;
@@ -164,8 +166,11 @@ void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients) {
 						step.route->transportMethod, step.route->travelTime
 				);
 				client->addTrip(trip);
+				step.route->traveledTimes++;
 			}
 
+			DB::saveDestinationsAndRoutes(R"(data\destinations.json)", graph);
+			DB::saveClientsAndRewards(R"(data\destinations.json)", clients, rewards);
 			cout << "Viaje registrado exitosamente.\n";
 		} else {
 			cout << "Número de ruta inválido.\n";
@@ -205,6 +210,7 @@ void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards)
 			auto reward = rewards.get(selectedReward - 1);
 			client->addReward(*reward);
 
+			DB::saveClientsAndRewards(R"(data\clients.json)", clients, rewards);
 			cout << "Premio canjeado exitosamente.\n";
 		} else {
 			cout << "Número de premio invalido.\n";
@@ -216,7 +222,47 @@ void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards)
 
 void printThreeMostFrecuentRoutes(TravelGraph &graph){};
 
-void printRoutesTraveledOnce(TravelGraph &graph){};
+void printRoutesTraveledOnce(TravelGraph &graph) {
+	system("cls");
+	cout << "================== Rutas recorridas una sola vez ==================\n";
+
+	queue<Destination*> queue;
+	graph.demark();
+
+	for (auto& dest : graph.destinations) {
+		if (!dest.visited) {
+			dest.visited = true;
+			queue.push(&dest);
+
+			while (!queue.empty()) {
+				Destination* current = queue.front();
+				queue.pop();
+
+				Route* route = current->routes;
+				while (route != nullptr) {
+					if (route->traveledTimes != 1) {
+						route = route->next;
+						continue;
+					};
+
+					Destination* destRoute = route->destination;
+
+					std::cout << "Origen: " << current->name << " ( " << current->entryPointName << " )" << std::endl;
+					std::cout << "\tDestino: " << destRoute->name << " ( " << destRoute->entryPointName << " )" << std::endl;
+					std::cout << "\tTransporte: " << route->getTransportMethod() << std::endl;
+					std::cout << "\tDuracion: " << route->travelTime << " horas" << std::endl;
+
+					if (!destRoute->visited) {
+						destRoute->visited = true;
+						queue.push(destRoute);
+					}
+					route = route->next;
+				}
+
+			}
+		}
+	}
+};
 
 void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
@@ -234,7 +280,7 @@ void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward>
 		switch (option) {
 			case 1:
 				system("cls");
-				printPosibleRoute(graph,clients);
+				printPosibleRoute(graph,clients, rewards);
 		        system("pause");
 				break;
 			case 2:

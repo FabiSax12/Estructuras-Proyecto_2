@@ -36,17 +36,19 @@ std::ifstream openFile(const std::string& filePath) {
 	return file;
 }
 
-std::filesystem::path getProjectRoot() {
+std::filesystem::path DB::getProjectRoot() {
 	std::filesystem::path currentPath = std::filesystem::current_path();
 	std::string buildDir = "cmake-build-debug";
-	if (currentPath.filename() == buildDir) {
+	std::string buildDir2 = "cmake-build-debug-prueba";
+
+	if (currentPath.filename()== buildDir || currentPath.filename() == buildDir2) {
 		currentPath = currentPath.parent_path();
 	}
 	return currentPath;
 }
 
 json getHoleRoute(string filePath) {
-	std::filesystem::path projectRoot = getProjectRoot();
+	std::filesystem::path projectRoot = DB::getProjectRoot();
 	std::filesystem::path fullPath = projectRoot / filePath;
 	// std::cout << "Esta es la ruta obtenida: " << fullPath << std::endl;
 	json data;
@@ -94,7 +96,7 @@ void DB::loadDestinationsAndRoutes(const std::string& filePath, TravelGraph& gra
 	std::cout << "Destinos y rutas cargados correctamente desde JSON.\n";
 }
 
-void DB::loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& clients, SimpleList<Reward>& rewards) {
+void DB::loadClientsAndRewards(const std::string &filePath, TravelGraph& graph, SimpleList<Client>& clients, SimpleList<Reward>& rewards) {
 	json data = getHoleRoute(filePath);
 
 	for (const auto& rewardData : data["premiosDisponibles"]) {
@@ -128,7 +130,14 @@ void DB::loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& 
 					hours
 			);
 
+			if (!graph.routeExist(
+				graph.findDestination(originParts[0], originParts[1]),
+				destParts[1]
+			)) continue;
+
+			auto route = graph.findRoute(originParts[0], originParts[1], destParts[0], destParts[1]);
 			newClient.addTrip(trip);
+			route->traveledTimes++;
 		}
 
 		for (const auto& rewardData : clientData["premios"]) {
@@ -141,16 +150,9 @@ void DB::loadClientsAndRewards(const std::string &filePath, SimpleList<Client>& 
 	}
 }
 
-std::filesystem::path DB::getProjectRoot() {
-    std::filesystem::path currentPath = std::filesystem::current_path();
-    std::string buildDir = "cmake-build-debug";
-    if (currentPath.filename() == buildDir) {
-        currentPath = currentPath.parent_path();
-    }
-    return currentPath;
-}
 
-std::string DB::entryPointTypeToString(EntryPointType type) const {
+
+std::string DB::entryPointTypeToString(EntryPointType type) {
     switch (type) {
         case EntryPointType::AIRPORT:
             return "Airport";
@@ -163,7 +165,7 @@ std::string DB::entryPointTypeToString(EntryPointType type) const {
     }
 }
 
-std::string DB::transportMethodToString(TransportMethod method) const {
+std::string DB::transportMethodToString(TransportMethod method) {
     switch (method) {
         case TransportMethod::PLANE:
             return "Avion";

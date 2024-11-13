@@ -25,6 +25,10 @@ struct TravelGraph {
 	void startDepthTraversal() const;
 	void demark() const;
 	bool routeExist(Destination *origin, const string& destination);
+	[[nodiscard]] Route* findRoute(
+		const std::string& originCountry, const std::string& originEntryPoint,
+		const std::string& destCountry, const std::string& destEntryPoint
+	) const;
 };
 
 #endif // TRAVELGRAPH_H

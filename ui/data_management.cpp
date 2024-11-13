@@ -128,8 +128,7 @@ void deleteDestination(TravelGraph &graph) {
     cout<<"En la lista de destinos:"<<graph.destinations.get(index)->entryPointName<<endl;
     deleteRoutes(graph,graph.destinations.get(index));
     graph.destinations.removeByIndex(index);
-    DB db;
-    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
+    DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
 
 void addRoute(TravelGraph &graph) {
@@ -157,8 +156,7 @@ void addRoute(TravelGraph &graph) {
     else if (transportMethod == 2) tmType = TransportMethod::CRUISE;
 
     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
-    DB db;
-    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
+    DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
 
 void modifyRoute(TravelGraph &graph) {
@@ -210,8 +208,7 @@ void modifyRoute(TravelGraph &graph) {
                     currentRoute = currentRoute->next;
                     delete temp;
                     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
-                    DB db;
-                    db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
+                    DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
                 }
                 return;
             } else {
@@ -253,8 +250,7 @@ void deleteRoute(TravelGraph &graph) {
                 Route* temp = currentRoute;
                 currentRoute = currentRoute->next;
                 delete temp;
-                DB db;
-                db.saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
+                DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
                 return;
             } else {
                 tempIndex++;
@@ -268,6 +264,7 @@ void deleteRoute(TravelGraph &graph) {
 void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     const auto name = promptInput<string>("Nombre del cliente:");
     clients.add(Client(name));
+
     DB db;
     db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
@@ -275,6 +272,7 @@ void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
 void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index = selectIndex("Clientes:", clients.toString(), clients.getLength());
     clients.remove(*clients.get(index));
+
     DB db;
     db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
@@ -294,8 +292,10 @@ void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     const auto name = promptInput<string>("Nombre del premio:");
     const auto points = promptInput<int>("Puntos requeridos para canjear el premio:");
     rewards.add(Reward(name, points));
+
     DB db;
     db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
 }
 
 void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
@@ -313,6 +313,7 @@ void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     int index=selectOption(strRewards);
     if (index==-1){return;}
     auto reward = rewards.get(index);
+
     string strName;
     int points;
     cout << "Nuevo nombre del premio: ";
@@ -345,8 +346,10 @@ void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     if (index==-1){return;}
     //int index = selectIndex("Premios:", rewards.toString(), rewards.getLength());
     rewards.remove(*rewards.get(index));
+
     DB db;
     db.saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
+
 }
 
 // Menú principal de gestión de datos
