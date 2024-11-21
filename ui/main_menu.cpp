@@ -3,14 +3,10 @@
 //
 
 
-#define NOMINMAX         // Evita conflictos con min y max
-#define WIN32_LEAN_AND_MEAN // Excluye componentes menos usados de windows.h
 #include "main_menu.h"
 #include "../structures/PromptInput.h"
-#include "../structures/utils.h"
 #include <iostream>
 #include <cstdlib>
-#include <windows.h>
 
 using namespace std;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

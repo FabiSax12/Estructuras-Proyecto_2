@@ -143,13 +143,13 @@ void verifyInputType(){
 
  * @author Joseph
  */
-bool validateDates(int &day,int &month,int &year,string dateStr){
+bool validateDates(int &day,int &month,int &year,std::string dateStr){
     if (sscanf(dateStr.c_str(), "%d-%d-%d", &day, &month, &year) != 3) {
-        std::cout << "Formato de fecha invalido." << endl;
+        std::cout << "Formato de fecha invalido." << std::endl;
         return false;
     }
     if (month < 1 || month > 12) {      /*Validar que el mes esté entre 1 y 12*/
-        std::cout << "Mes invalido. Debe ser un numero entre 1 y 12." << endl;
+        std::cout << "Mes invalido. Debe ser un numero entre 1 y 12." << std::endl;
         return false;
     }
     int maxDaysInMonth;                 /*Determinar el número máximo de días en el mes dado*/
@@ -166,7 +166,7 @@ bool validateDates(int &day,int &month,int &year,string dateStr){
             break;
     }
     if (day < 1 || day > maxDaysInMonth) {                              /*Validar que el día esté dentro del rango válido para el mes*/
-        std::cout << "Dia invalido para el mes especificado." << endl;
+        std::cout << "Dia invalido para el mes especificado." << std::endl;
         return false;
     }
     return true;

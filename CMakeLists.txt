@@ -49,5 +49,7 @@ add_executable(Proyecto_2 main.cpp
         structures/DB.cpp
         structures/DB.cpp
         structures/DB.cpp
+        structures/utils.cpp
+        structures/utils.cpp
 )
 target_link_libraries(Proyecto_2 PRIVATE nlohmann_json::nlohmann_json)

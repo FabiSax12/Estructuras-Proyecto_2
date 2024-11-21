@@ -11,6 +11,11 @@
 #include <algorithm>
 #include <cctype>
 
+enum class DataType {
+	Int,
+	String,
+	Double
+};
 /**
  * @brief Defines types of entry points within a destination.
  *

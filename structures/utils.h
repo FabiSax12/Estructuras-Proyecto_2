@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <windows.h>
+#include <string>
 
 /**
  * @brief Obtiene la posición actual del cursor en la consola.
@@ -41,11 +42,10 @@ void clearInputBuffer();
 
 void verifyInputType();
 
-bool validateDates(int &day,int &month,int &year,string dateStr);
+bool validateDates(int &day,int &month,int &year,std::string dateStr);
 
 void hideCursor();
 
 void showCursor();
 
-#include "utils.cpp"
 #endif // UTILS_H

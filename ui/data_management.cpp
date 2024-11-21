@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include <cmath>  // Para std::floor
+#include <cmath>
 #include "main_menu.h"
 #include "../structures/PromptInput.h"
 #include "../structures/TravelGraph.h"
@@ -11,6 +11,7 @@
 #include "../structures/DB.h"
 
 using namespace std;
+
 
 void addDestination(TravelGraph &graph) {
     cout << endl << " ================== Agregar destino ==================" << endl;
@@ -270,11 +271,14 @@ void deleteRoute(TravelGraph &graph) {
 }
 
 void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
-    cout << endl << " ================== Agregar cliente ==================" << endl;
+    cout << endl << " ================== Agregar cliente ================== " << endl;
+    std::cout << "ADEVERTENCIA:\nCaracteres no admitidos: "
+          << "!@#$%^&*+=~\\|\"'<>?/`" << std::endl;
     string strName;
     cout << "Nombre del cliente: ";
-    getline(cin, strName);
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    //getline(cin, strName);
+    input(strName,DataType::String,{});
     if(!strName.empty()) {
         clients.add(Client(strName));
         DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
