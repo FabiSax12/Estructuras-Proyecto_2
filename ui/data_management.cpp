@@ -18,13 +18,20 @@ void addDestination(TravelGraph &graph) {
     string ep_name;
 
     cout << "Nombre del pais: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    getline(cin, countryName);
+    // cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    // getline(cin, countryName);
+    input(countryName,DataType::String,{});
 
-    auto ep_typeIndex = selectIndex("Punto de entrada a " + countryName, "{ Aeropuerto, Frontera, Puerto }", 3);
+    //auto ep_typeIndex = selectIndex("Punto de entrada a " + countryName, "{ Aeropuerto, Frontera, Puerto }", 3);
+    int ep_typeIndex;
+    cout<<"Punto de entrada a " + countryName + ":{ Aeropuerto, Frontera, Puerto }\nEscoja mediante el indice (0 - 2): " ;
+    input(ep_typeIndex,DataType::Int,{0,2});
 
+    // cout << "Nombre del punto de entrada: ";
+    // getline(cin, ep_name);
+    
     cout << "Nombre del punto de entrada: ";
-    getline(cin, ep_name);
+    input(ep_name,DataType::String,{});
 
     EntryPointType ep_type;
     if (ep_typeIndex == 0) ep_type = EntryPointType::AIRPORT;
