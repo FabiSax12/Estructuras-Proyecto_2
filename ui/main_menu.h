@@ -42,7 +42,7 @@ inline void returnCursorPosition(COORD posText) {
 
 inline void clearCinBuffer() {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    
+
 }
 
 template <typename T>
@@ -83,6 +83,10 @@ inline void input<std::string>(std::string& value,std::vector<int> range) {
     std::string userValue;
     while (true) {
         std::getline(std::cin, userValue);
+        if (userValue.empty() || std::all_of(userValue.begin(), userValue.end(), [](unsigned char c) {return std::isspace(c);})) {
+            returnCursorPosition(posText);
+            continue;
+        }
         for (char c : userValue) {
             if (!std::isalnum(c) && allowed.find(c) == std::string::npos) {
                 error = true;

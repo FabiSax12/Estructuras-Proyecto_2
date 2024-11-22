@@ -127,7 +127,7 @@ void reports(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward>
 		cout << "Seleccione una opcion: ";
 
 		int option;
-		cin >> option;
+		input(option,{1,8});
 
 		switch (option) {
 		    case 1:

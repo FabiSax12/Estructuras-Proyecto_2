@@ -276,7 +276,7 @@ void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward>
 		cout << "Seleccione una opcion: ";
 
 		int option;
-		cin >> option;
+		input(option,{1,5});
 		switch (option) {
 			case 1:
 				system("cls");

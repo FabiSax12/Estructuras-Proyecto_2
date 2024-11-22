@@ -76,7 +76,7 @@ void showRoutes(TravelGraph &graph) {
     }
     vector<string> strDestinations;
     for (Destination destination : graph.destinations) {
-        strDestinations.push_back("Destino: "+destination.entryPointName+" ("+destination.name+" )");
+        strDestinations.push_back("Destino: "+destination.entryPointName+" ("+destination.name+")");
         cout<<"Destino: "+destination.entryPointName+" ("+destination.name+" )\n";
     }
     cout<<endl;
@@ -134,8 +134,6 @@ void deleteDestination(TravelGraph &graph) {
     cout<<endl;
     int index=selectOption(strDestinations);
     if (index==-1){return;}
-    cout<<"En la lilsta de cadenas:"<<strDestinations[index]<<endl;
-    cout<<"En la lista de destinos:"<<graph.destinations.get(index)->entryPointName<<endl;
     deleteRoutes(graph,graph.destinations.get(index));
     graph.destinations.removeByIndex(index);
     DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
@@ -161,6 +159,7 @@ void addRoute(TravelGraph &graph) {
     input(time,{});
     cout<<"Metodos de transporte: {Avion, Carro, Barco}\nEscoja mediante el indice (0 - 2): " ;
     input(transportMethod,{0,2});
+
     TransportMethod tmType;
     if (transportMethod == 0) tmType = TransportMethod::PLANE;
     else if (transportMethod == 1) tmType = TransportMethod::CAR;
@@ -171,7 +170,6 @@ void addRoute(TravelGraph &graph) {
 }
 
 void modifyRoute(TravelGraph &graph) {
-    system("cls");
     cout << endl << " ================== Modificar ruta ==================" << endl;
     vector<string> strRoutes;
     vector<Route*> vctrRoutes;
@@ -389,7 +387,6 @@ void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
 
 }
 
-// Menú principal de gestión de datos
 void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
     while (true) {
         system("cls");
