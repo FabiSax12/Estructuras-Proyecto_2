@@ -85,33 +85,6 @@
           "tipo": "Airport"
         }
       ]
-    },
-    {
-      "nombre": "Eslovaquia",
-      "puntos_de_entrada": [
-        {
-          "nombre": "UNKNOWN",
-          "tipo": "Airport"
-        }
-      ]
-    },
-    {
-      "nombre": "Nicaragua",
-      "puntos_de_entrada": [
-        {
-          "nombre": "San Carlos",
-          "tipo": "Border"
-        }
-      ]
-    },
-    {
-      "nombre": "Colombia",
-      "puntos_de_entrada": [
-        {
-          "nombre": "Medellin Airport",
-          "tipo": "Airport"
-        }
-      ]
     }
   ],
   "rutas": [

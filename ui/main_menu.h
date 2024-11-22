@@ -5,28 +5,22 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 
-
 #ifndef NOMINMAX
-#define NOMINMAX         // Evita conflictos con min y max
+#define NOMINMAX         /*Evita conflictos con min y max*/
 #endif
-#define WIN32_LEAN_AND_MEAN // Excluye componentes menos usados de windows.h
+#define WIN32_LEAN_AND_MEAN /*Excluye componentes menos usados de windows.h*/
 
 #include <string>
 #include <windows.h>
 #include <limits>
-
 #include "../structures/Client.h"
 #include "../structures/Reward.h"
 #include "../structures/TravelGraph.h"
 #include "../structures/utils.h"
 
-
-extern HANDLE hConsole; // Declaración externa
-
+extern HANDLE hConsole;
 
 int selectIndex(const std::string& listName, const std::string& listContent, int length);
-//bool verifyNumericInput(COORD posText);
-//void returnCursorPosition(COORD posText);
 
 inline bool verifyNumericInput(COORD posText) {
     if (std::cin.fail()) {
@@ -47,11 +41,8 @@ inline void returnCursorPosition(COORD posText) {
 }
 
 inline void clearCinBuffer() {
-    if (std::cin.peek() != '\n' && std::cin.peek() != EOF) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    } else {
-        std::cin.ignore(1);
-    }
+    
 }
 
 template <typename T>
