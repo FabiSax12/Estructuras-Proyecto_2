@@ -12,7 +12,6 @@
 
 using namespace std;
 
-
 void addDestination(TravelGraph &graph) {
     cout << endl << " ================== Agregar destino ==================" << endl;
     string countryName;
@@ -296,6 +295,7 @@ void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     Client* currentClient = clients.get(0);
     while(currentClient != nullptr) {
         cout<<"Cliente: "+currentClient->name+" Puntos Acumulados: "+std::to_string(currentClient->accumulatedPoints)<<endl;
+        strClients.push_back("Cliente: "+currentClient->name+" Puntos Acumulados: "+std::to_string(currentClient->accumulatedPoints));
         currentClient=currentClient->next;
     }cout<<endl;
     int index=selectOption(strClients);
