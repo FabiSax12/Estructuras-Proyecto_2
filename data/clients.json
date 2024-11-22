@@ -1,6 +1,12 @@
 {
   "clientes": [
     {
+      "nombre": "Melany Segura",
+      "premios": [],
+      "puntos": 0,
+      "viajes": []
+    },
+    {
       "nombre": "Sebastian",
       "premios": [],
       "puntos": 0,
@@ -38,6 +44,12 @@
     },
     {
       "nombre": "Alejandra",
+      "premios": [],
+      "puntos": 0,
+      "viajes": []
+    },
+    {
+      "nombre": "Adrian Pacheco",
       "premios": [],
       "puntos": 0,
       "viajes": []

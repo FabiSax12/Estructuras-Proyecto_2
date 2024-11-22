@@ -77,15 +77,7 @@ void menu(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &r
 		cout << "Escoja una opcion (1, 2, 3, 4): ";
 
 		int option = 0;
-		cin >> option;
-
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "Entrada no válida. Por favor, ingrese un número entre 1 y 4.\n";
-			system("pause");
-			continue;
-		}
+		input(option,{1,4});
 
 		switch (option) {
 			case 1:
@@ -98,7 +90,7 @@ void menu(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &r
 				queries(graph, clients, rewards);
 				break;
 			case 4:
-				return; // Cambiado para salir del ciclo y finalizar la función
+				return;
 			default:
 				cout << "Opcion inválida\n";
 				system("pause");

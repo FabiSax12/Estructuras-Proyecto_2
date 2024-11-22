@@ -63,18 +63,12 @@ void updateJSONDestinations(const std::string& countryName, const std::string& e
     if (outputFile.is_open()) {
         outputFile << j_graph.dump(2);
         outputFile.close();
-        std::cout << "Destino añadido.\n";
+        std::cout << "Destino guardado correctamente!.\n";
     } else {
         std::cerr << "Error al guardar los datos.: " <<std::endl;
     }
-    system("pause");
-
-    // std::ofstream outputFile(filename);
-    // outputFile << j_graph.dump(4);
-    // outputFile.close();
 
 }
-
 
 void deleteJSONDestination(const std::string& countryName, const std::string& ep_name, const std::string& filename) {
     if (InvalidCharacters(countryName) || InvalidCharacters(ep_name)) {

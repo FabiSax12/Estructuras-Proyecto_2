@@ -12,40 +12,36 @@
 
 using namespace std;
 
+void warningMessage() {
+    std::cout << "ADEVERTENCIA:\nCaracteres no admitidos: !@#$%^&*+=~\\|\"'<>?/`" << std::endl;
+}
+
 void addDestination(TravelGraph &graph) {
-    cout << endl << " ================== Agregar destino ==================" << endl;
     string countryName;
     string ep_name;
+    int ep_typeIndex;
+
+    cout << endl << " ================== Agregar destino ==================" << endl;
+    warningMessage();
 
     cout << "Nombre del pais: ";
-    // cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    // getline(cin, countryName);
-    input(countryName,DataType::String,{});
-
-    //auto ep_typeIndex = selectIndex("Punto de entrada a " + countryName, "{ Aeropuerto, Frontera, Puerto }", 3);
-    int ep_typeIndex;
+    input(countryName,{});
     cout<<"Punto de entrada a " + countryName + ":{ Aeropuerto, Frontera, Puerto }\nEscoja mediante el indice (0 - 2): " ;
-    input(ep_typeIndex,DataType::Int,{0,2});
-
-    // cout << "Nombre del punto de entrada: ";
-    // getline(cin, ep_name);
-    
+    input(ep_typeIndex,{0,2});
     cout << "Nombre del punto de entrada: ";
-    input(ep_name,DataType::String,{});
+    input(ep_name,{});
 
     EntryPointType ep_type;
     if (ep_typeIndex == 0) ep_type = EntryPointType::AIRPORT;
     else if (ep_typeIndex == 1) ep_type = EntryPointType::BORDER;
     else if (ep_typeIndex == 2) ep_type = EntryPointType::PORT;
 
-    ///////////////////////
     for (Destination& destination : graph.destinations) {
         if (destination.name == countryName&&destination.entryPointName==ep_name) {
             cout <<"El destino ya existe en el grafo" << endl;
             return;
         }
     }
-    ///////////////////////
 
     graph.addDestination(new Destination(countryName, ep_name, new EntryPoint(ep_type, ep_name)));
     updateJSONDestinations(countryName, ep_name, ep_type,"../data/destinations.json");
@@ -148,23 +144,24 @@ void deleteDestination(TravelGraph &graph) {
 
 void addRoute(TravelGraph &graph) {
     cout << endl << " ================== Agregar ruta ==================" << endl;
+    warningMessage();
     string originCountry, originEntryPoint;
     string destCountry, destEntryPoint;
+    double time;
+    int transportMethod;
 
     cout << "Nombre del pais de origen: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    getline(cin, originCountry);
+    input(originCountry,{});
     cout << "Nombre del punto de entrada de origen: ";
-    getline(cin, originEntryPoint);
-
+    input(originEntryPoint,{});
     cout << "Nombre del pais de destino: ";
-    getline(cin, destCountry);
+    input(destCountry,{});
     cout << "Nombre del punto de entrada de destino: ";
-    getline(cin, destEntryPoint);
-
-    const auto time = promptInput<double>("Tiempo de viaje: ");
-    auto transportMethod = selectIndex("Metodos de transporte: ", "{ Avion, Carro, Barco }", 3);
-
+    input(destEntryPoint,{});
+    cout<<"Tiempo de viaje: ";
+    input(time,{});
+    cout<<"Metodos de transporte: {Avion, Carro, Barco}\nEscoja mediante el indice (0 - 2): " ;
+    input(transportMethod,{0,2});
     TransportMethod tmType;
     if (transportMethod == 0) tmType = TransportMethod::PLANE;
     else if (transportMethod == 1) tmType = TransportMethod::CAR;
@@ -199,16 +196,20 @@ void modifyRoute(TravelGraph &graph) {
             if (tempIndex == index) {
                 system("cls");
                 cout << endl << " ================== Modificar ruta ==================" << endl;
+                warningMessage();
                 string originCountry = destination.name;
                 string originEntryPoint = destination.entryPointName;
                 string destCountry, destEntryPoint;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                double time;
+                int transportMethod;
                 cout << "Nombre del nuevo pais de destino: ";
-                getline(cin, destCountry);
+                input(destCountry,{});
                 cout << "Nombre del nuevo punto de entrada de destino: ";
-                getline(cin, destEntryPoint);
-                const auto time = promptInput<double>("Tiempo de viaje: ");
-                auto transportMethod = selectIndex("Metodos de transporte: ", "{ Avion, Carro, Barco }", 3);
+                input(destEntryPoint,{});
+                cout<<"Nuevo tiempo de viaje: ";
+                input(time,{});
+                cout<<"Nuevo metodo de transporte: {Avion, Carro, Barco}\nEscoja mediante el indice (0 - 2): " ;
+                input(transportMethod,{0,2});
                 TransportMethod tmType;
                 if (transportMethod == 0) tmType = TransportMethod::PLANE;
                 else if (transportMethod == 1) tmType = TransportMethod::CAR;
@@ -278,13 +279,10 @@ void deleteRoute(TravelGraph &graph) {
 
 void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     cout << endl << " ================== Agregar cliente ================== " << endl;
-    std::cout << "ADEVERTENCIA:\nCaracteres no admitidos: "
-          << "!@#$%^&*+=~\\|\"'<>?/`" << std::endl;
+    warningMessage();
     string strName;
     cout << "Nombre del cliente: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    //getline(cin, strName);
-    input(strName,DataType::String,{});
+    input(strName,{});
     if(!strName.empty()) {
         clients.add(Client(strName));
         DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
@@ -329,9 +327,9 @@ void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     string strName;
     int points;
     cout << "Nombre del premio: ";
-    getline(cin, strName);
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    points = promptInput<int>("Puntos requeridos para canjear el premio:: ");
+    input(strName,{});
+    cout<<"Puntos requeridos para canjear el premio: ";
+    input(points,{});
     if(points>0&&!strName.empty()) {
         rewards.add(Reward(strName,points));
         DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
@@ -359,9 +357,9 @@ void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     string strName;
     int points;
     cout << "Nuevo nombre del premio: ";
-    getline(cin, strName);
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    points = promptInput<int>("Nuevo numero de puntos requeridos: ");
+    input(strName,{});
+    cout<<"Nueva cantidad de puntos requeridos: ";
+    input(points,{});
     if(points>0&&!strName.empty()) {
         reward->name=strName;
         reward->pointsRequired=points;
@@ -413,16 +411,8 @@ void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<
         cout << "Seleccione una opcion: ";
 
         int option;
-        cin>>option;
 
-        if (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Entrada no válida. Por favor, ingrese un número entre 1 y 4.\n";
-            system("pause");
-            continue;
-        }
-
+        input(option,{1,13});
 
         switch (option) {
             case 1:

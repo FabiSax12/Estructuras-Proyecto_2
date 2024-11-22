@@ -150,8 +150,6 @@ void DB::loadClientsAndRewards(const std::string &filePath, TravelGraph& graph, 
 	}
 }
 
-
-
 std::string DB::entryPointTypeToString(EntryPointType type) {
     switch (type) {
         case EntryPointType::AIRPORT:

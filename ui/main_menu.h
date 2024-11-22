@@ -47,82 +47,24 @@ inline void returnCursorPosition(COORD posText) {
 }
 
 inline void clearCinBuffer() {
-    // Verifica el siguiente carácter sin extraerlo
     if (std::cin.peek() != '\n' && std::cin.peek() != EOF) {
-        // Hay caracteres adicionales, ignora hasta '\n'
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     } else {
-        // Solo hay '\n', ignora solo ese carácter
         std::cin.ignore(1);
     }
 }
 
-
-// template <typename T>
-// void input(T& value, DataType type, std::vector<int> range) {
-//     COORD posText = getCursorPosition(hConsole);
-//     while (true) {
-//         switch (type) {
-//             case DataType::Int: {
-//                 int userValue;
-//                 std::cin >> userValue;
-//                 if (verifyNumericInput(posText)) {
-//                     continue;
-//                 }
-//                 if (!range.empty() && (userValue < range[0] || userValue > range[1])) {
-//                     cout<<"CORRECTO: dentro del rango";
-//                     returnCursorPosition(posText);
-//                     continue;
-//                 }
-//                 value = userValue;
-//                 return;
-//             }
-//             case DataType::String: {
-//                 string allowed = " .,;:-_()[]{}";
-//                 bool error = false;
-//                 std::string userValue;
-//                 std::getline(std::cin, userValue);
-//                 for (char c : userValue) {
-//                     if (!std::isalnum(c) && allowed.find(c) == std::string::npos) {
-//                         error = true;
-//                     }
-//                 }
-//                 if (!error) {
-//                     value = userValue;
-//                     return;
-//                 }returnCursorPosition(posText);
-//                 continue;
-//             }
-//             case DataType::Double: {
-//                 double userValue;
-//                 std::cin >> userValue;
-//                 if (verifyNumericInput(posText)) {
-//                     continue;
-//                 }
-//                 if (userValue <= 0) {
-//                     returnCursorPosition(posText);
-//                     continue;
-//                 }
-//                 value = userValue;
-//                 return;
-//             }
-//             default:
-//                 std::cout<<"Error al detectar el tipo de dato";
-//         }
-//     }
-// }
-// Declaración de la plantilla general
 template <typename T>
-void input(T& value, DataType type, std::vector<int> range) {
+void input(T& value,std::vector<int> range) {
     static_assert(sizeof(T) == 0, "input no está especializado para este tipo.");
 }
 
 template<>
-inline void input<int>(int& value, DataType type, std::vector<int> range) {
+inline void input<int>(int& value,std::vector<int> range) {
     COORD posText = getCursorPosition(hConsole);
-    cout<<"Caso:int";
+    //cout<<"Caso:int";
+    int userValue;
     while (true) {
-        int userValue;
         std::cin >> userValue;
         if (verifyNumericInput(posText)) {
             continue;
@@ -131,21 +73,24 @@ inline void input<int>(int& value, DataType type, std::vector<int> range) {
             returnCursorPosition(posText);
             continue;
         }
-        cout<<"CORRECTO: dentro del rango";
+        if (userValue < 0) {
+            returnCursorPosition(posText);
+            continue;
+        }
         value = userValue;
         return;
     }
 }
 
 template<>
-inline void input<std::string>(std::string& value, DataType type, std::vector<int> range) {
+inline void input<std::string>(std::string& value,std::vector<int> range) {
     clearCinBuffer();
     COORD posText = getCursorPosition(hConsole);
-    cout<<"Caso:string";
+    //cout<<"Caso:string";
+    string allowed = " .,;:-_()[]{}";
+    bool error = false;
+    std::string userValue;
     while (true) {
-        string allowed = " .,;:-_()[]{}";
-        bool error = false;
-        std::string userValue;
         std::getline(std::cin, userValue);
         for (char c : userValue) {
             if (!std::isalnum(c) && allowed.find(c) == std::string::npos) {
@@ -160,11 +105,11 @@ inline void input<std::string>(std::string& value, DataType type, std::vector<in
 }
 
 template<>
-inline void input<double>(double& value, DataType type, std::vector<int> range) {
+inline void input<double>(double& value,std::vector<int> range) {
     COORD posText = getCursorPosition(hConsole);
-    cout<<"Caso:double";
+    //cout<<"Caso:double";
+    double userValue;
     while (true) {
-        double userValue;
         std::cin >> userValue;
         if (verifyNumericInput(posText)) {
             continue;
