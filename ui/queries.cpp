@@ -170,7 +170,7 @@ void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients, SimpleLi
 			}
 
 			DB::saveDestinationsAndRoutes(R"(data\destinations.json)", graph);
-			DB::saveClientsAndRewards(R"(data\destinations.json)", clients, rewards);
+			DB::saveClientsAndRewards(R"(data\clients.json)", clients, rewards);
 			cout << "Viaje registrado exitosamente.\n";
 		} else {
 			cout << "Número de ruta inválido.\n";
@@ -189,6 +189,7 @@ void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards)
 	auto client = findOrCreateClient(clientName, clients);
 
 	cout << "\n" << client->name << " tiene " << client->accumulatedPoints << " puntos." << endl;
+	if(client->accumulatedPoints == 0) {return;}
 	cout << "\nPremios que puede canjear: ";
 	for (auto& reward : rewards) {
 		if (reward.canRedeem(client->accumulatedPoints)) {

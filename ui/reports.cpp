@@ -115,7 +115,7 @@ void printNonVisitedDestinations(TravelGraph &graph, SimpleList<Client> &clients
 void reports(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
 		system("cls");
-		cout << "================== Gestion de Datos ==================\n";
+		cout << "================== Reportes ==================\n";
 		cout << "1. Grafo en amplitud\n";
 		cout << "2. Grafo en profundidad\n";
 		cout << "3. Lista de premios\n";
