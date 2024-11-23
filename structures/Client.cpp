@@ -17,6 +17,14 @@ int Client::getPoints() const {
 	return accumulatedPoints;
 }
 
+void Client::loadTrip(const Trip& trip) const {
+	trips->add(trip);
+}
+
+void Client::loadReward(const Reward &reward) const {
+	rewardsEarned->add(reward);
+}
+
 void Client::addTrip(const Trip& trip) {
 	trips->add(trip);
 	addPoints(static_cast<int>(trip.pointsEarned));

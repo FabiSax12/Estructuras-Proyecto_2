@@ -1,42 +1,51 @@
 {
   "clientes": [
     {
-      "nombre": "Juan Perez",
-      "puntos": 1500,
-      "viajes": [
+      "nombre": "Maria Gomez",
+      "premios": [
         {
-          "origen": "USA - JFK Airport",
-          "destino": "Mexico - Cancun Airport",
-          "transporte": "Avion",
-          "horas": 5
+          "nombre": "Tour gratuito",
+          "puntosUsados": 800
         }
       ],
+      "puntos": 0,
+      "viajes": []
+    },
+    {
+      "nombre": "Juan Perez",
       "premios": [
         {
           "nombre": "Descuento en hotel",
           "puntosUsados": 500
+        },
+        {
+          "nombre": "Boleto de avion",
+          "puntosUsados": 1000
+        }
+      ],
+      "puntos": 0,
+      "viajes": [
+        {
+          "destino": "Mexico - Cancun Airport",
+          "horas": 5.0,
+          "origen": "USA - JFK Airport",
+          "transporte": "Avion"
         }
       ]
-    },
-    {
-      "nombre": "Maria Gomez",
-      "puntos": 800,
-      "viajes": [],
-      "premios": []
     }
   ],
   "premiosDisponibles": [
     {
-      "nombre": "Boleto de avion",
-      "puntosRequeridos": 1000
+      "nombre": "Tour gratuito",
+      "puntosRequeridos": 800
     },
     {
       "nombre": "Descuento en hotel",
       "puntosRequeridos": 500
     },
     {
-      "nombre": "Tour gratuito",
-      "puntosRequeridos": 800
+      "nombre": "Boleto de avion",
+      "puntosRequeridos": 1000
     }
   ]
 }

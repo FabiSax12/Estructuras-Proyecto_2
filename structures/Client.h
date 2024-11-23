@@ -19,6 +19,8 @@ public:
 	[[nodiscard]] int getPoints() const;
 	void addTrip(const Trip& trip);
 	void addReward(const Reward& reward);
+	void loadTrip(const Trip& trip) const;
+	void loadReward(const Reward& reward) const;
 	[[nodiscard]] const SimpleList<Trip>& getTrips() const;   // Devuelve una referencia constante a los viajes
 	[[nodiscard]] const SimpleList<Reward>& getRewards() const; // Devuelve una referencia constante a los premios
 

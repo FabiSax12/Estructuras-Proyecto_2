@@ -108,6 +108,7 @@ void DB::loadClientsAndRewards(const std::string &filePath, TravelGraph& graph, 
 	for (auto& clientData : data["clientes"]) {
 		std::string name = clientData["nombre"];
 		int points = clientData["puntos"];
+		cout<<"Puntos añadidos al cliente ("<<clientData["nombre"]<<" Puntos: "<<clientData["puntos"];
 
 		Client newClient(name);
 		newClient.addPoints(points);
@@ -136,14 +137,14 @@ void DB::loadClientsAndRewards(const std::string &filePath, TravelGraph& graph, 
 			)) continue;
 
 			auto route = graph.findRoute(originParts[0], originParts[1], destParts[0], destParts[1]);
-			newClient.addTrip(trip);
+			newClient.loadTrip(trip);
 			route->traveledTimes++;
 		}
 
 		for (const auto& rewardData : clientData["premios"]) {
 			std::string rewardName = rewardData["nombre"];
 			int pointsUsed = rewardData["puntosUsados"];
-			newClient.addReward(Reward(rewardName, pointsUsed));
+			newClient.loadReward(Reward(rewardName, pointsUsed));
 		}
 
 		clients.add(newClient);
