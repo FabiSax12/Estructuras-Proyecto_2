@@ -42,6 +42,15 @@ void findAllRoutes(
 	visited.erase(current);
 }
 
+Client* findClient(const string& name, SimpleList<Client>& clients) {
+	for (auto& client : clients) {
+		if (client.name == name) {
+			return &client;
+		}
+	}
+	return nullptr;
+}
+
 Client* findOrCreateClient(const string& name, SimpleList<Client>& clients) {
 	for (auto& client : clients) {
 		if (client.name == name) {
@@ -154,8 +163,10 @@ void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients, SimpleLi
 			string clientName;
 			getline(cin, clientName);
 
-			// Buscar o crear el cliente
+			// Buscar cliente
 			Client* client = findOrCreateClient(clientName, clients);
+
+			if (client == nullptr) {return;}
 
 			// Agregar los viajes al cliente
 			const RouteInfo& routeInfo = routesInfo[selectedRoute - 1];
@@ -179,48 +190,6 @@ void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients, SimpleLi
 		cout << "No se ha tomado ninguna ruta.\n";
 	}
 };
-
-// void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
-// 	cout << "Nombre completo del cliente: ";
-// 	string clientName;
-// 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-// 	getline(cin, clientName);
-//
-// 	auto client = findOrCreateClient(clientName, clients);
-//
-// 	cout << "\n" << client->name << " tiene " << client->accumulatedPoints << " puntos." << endl;
-// 	if(client->accumulatedPoints == 0) {return;}
-// 	cout << "\nPremios que puede canjear: ";
-// 	for (auto& reward : rewards) {
-// 		if (reward.canRedeem(client->accumulatedPoints)) {
-// 			cout << "\n\t" << reward.name << " por " << reward.pointsRequired << " puntos.";
-// 		}
-// 	}
-//
-// 	cout << "\nDesea canjear algun premio? (si/no): ";
-// 	string decision;
-// 	getline(cin, decision);
-//
-// 	if (decision == "sí" || decision == "si" || decision == "Sí" || decision == "Si") {
-// 		cout << "Ingrese el numero premio que desea canjear: ";
-// 		int selectedReward;
-// 		cin >> selectedReward;
-// 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-//
-// 		if (selectedReward > 0 && selectedReward <= rewards.length) {
-// 			auto reward = rewards.get(selectedReward - 1);
-// 			client->addReward(*reward);
-//
-// 			DB::saveClientsAndRewards(R"(data\clients.json)", clients, rewards);
-// 			cout << "Premio canjeado exitosamente.\n";
-// 		} else {
-// 			cout << "Número de premio invalido.\n";
-// 		}
-// 	} else {
-// 		cout << "No se ha canjeado ningun premio.\n";
-// 	}
-// };
-
 
 void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	cout<<"//////////////////////// Canjear Premio //////////////////////////////"<<endl;

@@ -1,40 +1,18 @@
 {
   "paises": [
     {
-      "nombre": "Canada",
+      "nombre": "USA",
       "puntos_de_entrada": [
         {
-          "nombre": "Niagara Border",
-          "tipo": "Border"
+          "nombre": "JFK Airport",
+          "tipo": "Airport"
         },
         {
-          "nombre": "Vancouver Port",
+          "nombre": "Port of Miami",
           "tipo": "Port"
         },
         {
-          "nombre": "Toronto Airport",
-          "tipo": "Airport"
-        }
-      ]
-    },
-    {
-      "nombre": "Costa Rica",
-      "puntos_de_entrada": [
-        {
-          "nombre": "Aeropuerto Juan Santa Maria",
-          "tipo": "Airport"
-        }
-      ]
-    },
-    {
-      "nombre": "France",
-      "puntos_de_entrada": [
-        {
-          "nombre": "Calais Port",
-          "tipo": "Port"
-        },
-        {
-          "nombre": "Charles de Gaulle Airport",
+          "nombre": "Los Angeles Airport",
           "tipo": "Airport"
         }
       ]
@@ -43,16 +21,33 @@
       "nombre": "Mexico",
       "puntos_de_entrada": [
         {
-          "nombre": "Tijuana Border",
-          "tipo": "Border"
+          "nombre": "Cancun Airport",
+          "tipo": "Airport"
         },
         {
           "nombre": "Puerto Vallarta Port",
           "tipo": "Port"
         },
         {
-          "nombre": "Cancun Airport",
+          "nombre": "Tijuana Border",
+          "tipo": "Border"
+        }
+      ]
+    },
+    {
+      "nombre": "Canada",
+      "puntos_de_entrada": [
+        {
+          "nombre": "Toronto Airport",
           "tipo": "Airport"
+        },
+        {
+          "nombre": "Vancouver Port",
+          "tipo": "Port"
+        },
+        {
+          "nombre": "Niagara Border",
+          "tipo": "Border"
         }
       ]
     },
@@ -60,29 +55,25 @@
       "nombre": "UK",
       "puntos_de_entrada": [
         {
-          "nombre": "Liverpool Port",
-          "tipo": "Port"
-        },
-        {
           "nombre": "Heathrow Airport",
           "tipo": "Airport"
+        },
+        {
+          "nombre": "Liverpool Port",
+          "tipo": "Port"
         }
       ]
     },
     {
-      "nombre": "USA",
+      "nombre": "France",
       "puntos_de_entrada": [
         {
-          "nombre": "Los Angeles Airport",
+          "nombre": "Charles de Gaulle Airport",
           "tipo": "Airport"
         },
         {
-          "nombre": "Port of Miami",
+          "nombre": "Calais Port",
           "tipo": "Port"
-        },
-        {
-          "nombre": "JFK Airport",
-          "tipo": "Airport"
         }
       ]
     }
@@ -90,97 +81,37 @@
   "rutas": [
     {
       "destino": {
-        "pais": "UK",
-        "punto_de_entrada": "Liverpool Port"
+        "pais": "Mexico",
+        "punto_de_entrada": "Cancun Airport"
       },
-      "horas": 5.0,
+      "horas": 5,
       "origen": {
-        "pais": "France",
-        "punto_de_entrada": "Calais Port"
-      },
-      "transporte": "Crucero"
-    },
-    {
-      "destino": {
-        "pais": "Canada",
-        "punto_de_entrada": "Toronto Airport"
-      },
-      "horas": 8.0,
-      "origen": {
-        "pais": "France",
-        "punto_de_entrada": "Charles de Gaulle Airport"
-      },
-      "transporte": "Avion"
-    },
-    {
-      "destino": {
         "pais": "USA",
         "punto_de_entrada": "JFK Airport"
-      },
-      "horas": 8.0,
-      "origen": {
-        "pais": "France",
-        "punto_de_entrada": "Charles de Gaulle Airport"
-      },
-      "transporte": "Avion"
-    },
-    {
-      "destino": {
-        "pais": "France",
-        "punto_de_entrada": "Calais Port"
-      },
-      "horas": 5.0,
-      "origen": {
-        "pais": "UK",
-        "punto_de_entrada": "Liverpool Port"
-      },
-      "transporte": "Crucero"
-    },
-    {
-      "destino": {
-        "pais": "France",
-        "punto_de_entrada": "Charles de Gaulle Airport"
-      },
-      "horas": 1.0,
-      "origen": {
-        "pais": "UK",
-        "punto_de_entrada": "Heathrow Airport"
       },
       "transporte": "Avion"
     },
     {
       "destino": {
         "pais": "Mexico",
-        "punto_de_entrada": "Tijuana Border"
+        "punto_de_entrada": "Puerto Vallarta Port"
       },
-      "horas": 40.0,
+      "horas": 36,
       "origen": {
-        "pais": "Canada",
-        "punto_de_entrada": "Niagara Border"
-      },
-      "transporte": "Carro"
-    },
-    {
-      "destino": {
         "pais": "USA",
-        "punto_de_entrada": "JFK Airport"
+        "punto_de_entrada": "Port of Miami"
       },
-      "horas": 7.0,
-      "origen": {
-        "pais": "Canada",
-        "punto_de_entrada": "Niagara Border"
-      },
-      "transporte": "Carro"
+      "transporte": "Crucero"
     },
     {
       "destino": {
-        "pais": "UK",
-        "punto_de_entrada": "Heathrow Airport"
-      },
-      "horas": 7.0,
-      "origen": {
         "pais": "Canada",
-        "punto_de_entrada": "Toronto Airport"
+        "punto_de_entrada": "Vancouver Port"
+      },
+      "horas": 3,
+      "origen": {
+        "pais": "USA",
+        "punto_de_entrada": "Los Angeles Airport"
       },
       "transporte": "Avion"
     },
@@ -189,7 +120,7 @@
         "pais": "USA",
         "punto_de_entrada": "Los Angeles Airport"
       },
-      "horas": 4.0,
+      "horas": 4,
       "origen": {
         "pais": "Mexico",
         "punto_de_entrada": "Tijuana Border"
@@ -198,22 +129,82 @@
     },
     {
       "destino": {
-        "pais": "Canada",
-        "punto_de_entrada": "Vancouver Port"
+        "pais": "USA",
+        "punto_de_entrada": "JFK Airport"
       },
-      "horas": 48.0,
+      "horas": 7,
       "origen": {
-        "pais": "Mexico",
-        "punto_de_entrada": "Puerto Vallarta Port"
+        "pais": "Canada",
+        "punto_de_entrada": "Niagara Border"
       },
-      "transporte": "Crucero"
+      "transporte": "Carro"
     },
     {
       "destino": {
         "pais": "France",
         "punto_de_entrada": "Charles de Gaulle Airport"
       },
-      "horas": 10.0,
+      "horas": 1,
+      "origen": {
+        "pais": "UK",
+        "punto_de_entrada": "Heathrow Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "France",
+        "punto_de_entrada": "Calais Port"
+      },
+      "horas": 5,
+      "origen": {
+        "pais": "UK",
+        "punto_de_entrada": "Liverpool Port"
+      },
+      "transporte": "Crucero"
+    },
+    {
+      "destino": {
+        "pais": "UK",
+        "punto_de_entrada": "Liverpool Port"
+      },
+      "horas": 5,
+      "origen": {
+        "pais": "France",
+        "punto_de_entrada": "Calais Port"
+      },
+      "transporte": "Crucero"
+    },
+    {
+      "destino": {
+        "pais": "USA",
+        "punto_de_entrada": "JFK Airport"
+      },
+      "horas": 8,
+      "origen": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "UK",
+        "punto_de_entrada": "Heathrow Airport"
+      },
+      "horas": 7,
+      "origen": {
+        "pais": "Canada",
+        "punto_de_entrada": "Toronto Airport"
+      },
+      "transporte": "Avion"
+    },
+    {
+      "destino": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
+      },
+      "horas": 10,
       "origen": {
         "pais": "Mexico",
         "punto_de_entrada": "Cancun Airport"
@@ -225,7 +216,7 @@
         "pais": "UK",
         "punto_de_entrada": "Heathrow Airport"
       },
-      "horas": 11.0,
+      "horas": 11,
       "origen": {
         "pais": "USA",
         "punto_de_entrada": "Los Angeles Airport"
@@ -237,22 +228,10 @@
         "pais": "Canada",
         "punto_de_entrada": "Vancouver Port"
       },
-      "horas": 3.0,
+      "horas": 48,
       "origen": {
-        "pais": "USA",
-        "punto_de_entrada": "Los Angeles Airport"
-      },
-      "transporte": "Avion"
-    },
-    {
-      "destino": {
         "pais": "Mexico",
         "punto_de_entrada": "Puerto Vallarta Port"
-      },
-      "horas": 36.0,
-      "origen": {
-        "pais": "USA",
-        "punto_de_entrada": "Port of Miami"
       },
       "transporte": "Crucero"
     },
@@ -271,12 +250,24 @@
     {
       "destino": {
         "pais": "Mexico",
-        "punto_de_entrada": "Cancun Airport"
+        "punto_de_entrada": "Tijuana Border"
       },
-      "horas": 5.0,
+      "horas": 40,
       "origen": {
-        "pais": "USA",
-        "punto_de_entrada": "JFK Airport"
+        "pais": "Canada",
+        "punto_de_entrada": "Niagara Border"
+      },
+      "transporte": "Carro"
+    },
+    {
+      "destino": {
+        "pais": "Canada",
+        "punto_de_entrada": "Toronto Airport"
+      },
+      "horas": 8,
+      "origen": {
+        "pais": "France",
+        "punto_de_entrada": "Charles de Gaulle Airport"
       },
       "transporte": "Avion"
     }

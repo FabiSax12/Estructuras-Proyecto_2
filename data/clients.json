@@ -2,13 +2,8 @@
   "clientes": [
     {
       "nombre": "Maria Gomez",
-      "premios": [
-        {
-          "nombre": "Tour gratuito",
-          "puntosUsados": 800
-        }
-      ],
-      "puntos": 0,
+      "premios": [],
+      "puntos": 800,
       "viajes": []
     },
     {
@@ -17,13 +12,9 @@
         {
           "nombre": "Descuento en hotel",
           "puntosUsados": 500
-        },
-        {
-          "nombre": "Boleto de avion",
-          "puntosUsados": 1000
         }
       ],
-      "puntos": 0,
+      "puntos": 1500,
       "viajes": [
         {
           "destino": "Mexico - Cancun Airport",
@@ -40,8 +31,8 @@
       "puntosRequeridos": 800
     },
     {
-      "nombre": "Descuento en hotel",
-      "puntosRequeridos": 500
+      "nombre": "Cena en restaurante Buffet",
+      "puntosRequeridos": 800
     },
     {
       "nombre": "Boleto de avion",
