@@ -12,7 +12,17 @@
 #include "../structures/PathStep.h"
 
 using namespace std;
-
+/**
+ * Encuentra todas las rutas posibles desde un destino actual hasta un destino final utilizando los métodos de transporte permitidos.
+ * Esta función utiliza búsqueda en profundidad (DFS) para explorar todas las rutas y almacena cada ruta válida encontrada.
+ *
+ * @param current El destino actual que se está explorando.
+ * @param destination El destino final al que se desea llegar.
+ * @param allowedMethods Vector de métodos de transporte permitidos.
+ * @param path Vector que almacena la ruta actual que se está construyendo.
+ * @param allRoutes Vector que almacena todas las rutas válidas encontradas.
+ * @param visited Conjunto que lleva el registro de destinos visitados para evitar ciclos.
+ */
 void findAllRoutes(
 	Destination* current, Destination* destination, const vector<TransportMethod>& allowedMethods,
 	vector<PathStep>& path, vector<vector<PathStep>>& allRoutes,
@@ -41,7 +51,13 @@ void findAllRoutes(
 
 	visited.erase(current);
 }
-
+/**
+ * Busca un cliente por nombre en la lista de clientes.
+ *
+ * @param name El nombre del cliente a buscar.
+ * @param clients La lista de clientes donde se realizará la búsqueda.
+ * @return Un puntero al cliente si se encuentra; de lo contrario, nullptr.
+ */
 Client* findClient(const string& name, SimpleList<Client>& clients) {
 	for (auto& client : clients) {
 		if (client.name == name) {
@@ -50,7 +66,13 @@ Client* findClient(const string& name, SimpleList<Client>& clients) {
 	}
 	return nullptr;
 }
-
+/**
+ * Busca un cliente por nombre; si no existe, crea uno nuevo y lo agrega a la lista de clientes.
+ *
+ * @param name El nombre del cliente a buscar o crear.
+ * @param clients La lista de clientes.
+ * @return Un puntero al cliente encontrado o recién creado.
+ */
 Client* findOrCreateClient(const string& name, SimpleList<Client>& clients) {
 	for (auto& client : clients) {
 		if (client.name == name) {
@@ -62,7 +84,14 @@ Client* findOrCreateClient(const string& name, SimpleList<Client>& clients) {
 	clients.add(newClient);
 	return clients.get(0);
 }
-
+/**
+ * Encuentra y muestra todas las rutas posibles entre dos destinos utilizando los métodos de transporte especificados.
+ * Permite al usuario seleccionar una ruta y registra el viaje para un cliente, actualizando sus puntos e historial de viajes.
+ *
+ * @param graph El grafo de viajes que contiene los destinos y rutas.
+ * @param clients La lista de clientes registrados.
+ * @param rewards La lista de recompensas disponibles.
+ */
 void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	string originCountry, originEntryPoint;
 	string destinationCountry, destinationEntryPoint;
@@ -190,7 +219,13 @@ void printPosibleRoute(TravelGraph &graph, SimpleList<Client> &clients, SimpleLi
 		cout << "No se ha tomado ninguna ruta.\n";
 	}
 };
-
+/**
+ * Muestra los premios que un cliente puede canjear según sus puntos acumulados.
+ * Permite al cliente seleccionar y canjear un premio, actualizando sus puntos en consecuencia.
+ *
+ * @param clients La lista de clientes registrados.
+ * @param rewards La lista de recompensas disponibles.
+ */
 void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	cout<<"//////////////////////// Canjear Premio //////////////////////////////"<<endl;
 	if (clients.getLength() < 1) {
@@ -250,9 +285,17 @@ void printChooseReward(SimpleList<Client> &clients, SimpleList<Reward> &rewards)
 		cout << "No se ha canjeado ningun premio.\n";
 	}
 };
-
+/**
+ * Calcula y muestra las tres rutas más frecuentemente recorridas en el grafo de viajes.
+ *
+ * @param graph El grafo de viajes que contiene los destinos y rutas.
+ */
 void printThreeMostFrecuentRoutes(TravelGraph &graph){};
-
+/**
+ * Muestra todas las rutas en el grafo de viajes que han sido recorridas exactamente una vez.
+ *
+ * @param graph El grafo de viajes que contiene los destinos y rutas.
+ */
 void printRoutesTraveledOnce(TravelGraph &graph) {
 	system("cls");
 	cout << "================== Rutas recorridas una sola vez ==================\n";
@@ -294,7 +337,14 @@ void printRoutesTraveledOnce(TravelGraph &graph) {
 		}
 	}
 };
-
+/**
+ * Muestra el menú de consultas, permitiendo al usuario realizar diversas acciones como encontrar rutas posibles,
+ * canjear premios, ver las rutas más frecuentes y ver las rutas recorridas una sola vez.
+ *
+ * @param graph El grafo de viajes que contiene los destinos y rutas.
+ * @param clients La lista de clientes registrados.
+ * @param rewards La lista de recompensas disponibles.
+ */
 void queries(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
     system("cls");

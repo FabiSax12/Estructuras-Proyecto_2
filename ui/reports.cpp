@@ -8,10 +8,22 @@
 
 using namespace std;
 
+/**
+ * Realiza un recorrido en amplitud (BFS) del grafo de viajes y muestra los destinos visitados.
+ *
+ * @param graph El grafo de viajes que se recorrerá en amplitud.
+ */
 void amplitudeGraph(TravelGraph &graph) {
 	graph.amplitude();
 }
 
+
+/**
+ * Realiza un recorrido en profundidad (DFS) del grafo de viajes a partir de un destino inicial ingresado por el usuario.
+ * Si el destino inicial no se encuentra en el grafo, se muestra un mensaje de error.
+ *
+ * @param graph El grafo de viajes que se recorrerá en profundidad.
+ */
 void depthGraph(TravelGraph &graph) {
 	graph.demark();
 
@@ -32,6 +44,12 @@ void depthGraph(TravelGraph &graph) {
 	graph.depth(start);
 }
 
+/**
+ * Muestra la lista de todos los premios disponibles.
+ * Si no hay premios, se informa al usuario que no hay premios para mostrar.
+ *
+ * @param rewards La lista de recompensas disponibles.
+ */
 void printRewards(const SimpleList<Reward>& rewards) {
 	if (rewards.getLength() == 0) {
 		std::cout << "No hay premios para mostrar." << std::endl;
@@ -41,6 +59,12 @@ void printRewards(const SimpleList<Reward>& rewards) {
 	rewards.printRecursive();
 }
 
+/**
+ * Muestra la lista de todos los clientes registrados junto con sus puntos acumulados.
+ * Si no hay clientes, se informa al usuario que no hay clientes para mostrar.
+ *
+ * @param clients La lista de clientes registrados en el sistema.
+ */
 void printClientsWithPoints(SimpleList<Client> &clients) {
 	if (clients.getLength() == 0) {
 		std::cout << "No hay clientes para mostrar." << std::endl;
@@ -50,6 +74,12 @@ void printClientsWithPoints(SimpleList<Client> &clients) {
 	clients.printRecursive();
 }
 
+/**
+ * Muestra los clientes que tienen viajes registrados, junto con los detalles de cada viaje.
+ * Si ningún cliente tiene viajes, se informa al usuario.
+ *
+ * @param clients La lista de clientes registrados en el sistema.
+ */
 void printClientsWithTrips(SimpleList<Client> &clients) {
 	bool anyClientWithTrips = false;
 	for (const auto& client : clients) {
@@ -67,6 +97,12 @@ void printClientsWithTrips(SimpleList<Client> &clients) {
 	}
 }
 
+/**
+ * Muestra los clientes que han canjeado premios, junto con los detalles de cada premio.
+ * Si ningún cliente ha canjeado premios, se informa al usuario.
+ *
+ * @param clients La lista de clientes registrados en el sistema.
+ */
 void printClientsWithRewards(SimpleList<Client> &clients) {
 	bool anyClientWithRewards = false;
 	for (const auto& client : clients) {
@@ -84,7 +120,13 @@ void printClientsWithRewards(SimpleList<Client> &clients) {
 	}
 }
 
-
+/**
+ * Muestra una lista de todos los destinos en el grafo que no han sido visitados por ningún cliente.
+ * Si todos los destinos han sido visitados, se informa al usuario.
+ *
+ * @param graph El grafo de viajes que contiene los destinos.
+ * @param clients La lista de clientes cuyos viajes se analizarán para determinar los destinos visitados.
+ */
 void printNonVisitedDestinations(TravelGraph &graph, SimpleList<Client> &clients) {
 	for (auto& dest : graph.destinations) {
 		dest.visited = false;
@@ -111,7 +153,14 @@ void printNonVisitedDestinations(TravelGraph &graph, SimpleList<Client> &clients
 	}
 }
 
-
+/**
+ * Muestra el menú de reportes, permitiendo al usuario generar diferentes informes como el recorrido del grafo,
+ * listas de premios, clientes y destinos no visitados. Gestiona la interacción del usuario con las distintas opciones.
+ *
+ * @param graph El grafo de viajes que contiene destinos y rutas.
+ * @param clients La lista de clientes registrados en el sistema.
+ * @param rewards La lista de recompensas disponibles en el sistema.
+ */
 void reports(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
 		system("cls");

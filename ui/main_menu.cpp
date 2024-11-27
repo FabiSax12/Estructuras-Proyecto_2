@@ -23,7 +23,14 @@ int selectIndex(const string& listName, const string& listContent, const int len
 	cout << listName << ": " << listContent << endl;
 	return promptInput<int>("Escoja mediante el indice (0 - " + to_string(length-1) + "): ");
 }
-
+/**
+ * Muestra una lista de opciones y permite al usuario navegar y seleccionar una opción usando las teclas de flecha y espacio.
+ *
+ * @param list Lista de opciones a mostrar.
+ * @param defaultMessage Mensaje predeterminado que se muestra al usuario.
+ * @param selectionType Tipo de selección a realizar (por ejemplo, "Opciones").
+ * @return Índice de la opción seleccionada por el usuario. Devuelve -1 si el usuario presiona ESC para salir.
+ */
 int selectOption(vector<string> list,string defaultMessage,string selectionType) {
 	hideCursor();
 	int opt = 0;
@@ -63,7 +70,14 @@ int selectOption(vector<string> list,string defaultMessage,string selectionType)
 	showCursor();
 	return opt;
 }
-
+/**
+ * Función principal del menú que muestra las opciones principales del sistema y gestiona la navegación entre ellas.
+ * Permite al usuario acceder a la gestión de datos, reportes, consultas o salir del programa.
+ *
+ * @param graph Grafo de viajes que contiene destinos y rutas.
+ * @param clients Lista de clientes registrados en el sistema.
+ * @param rewards Lista de recompensas disponibles para los clientes.
+ */
 void menu(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
 	while (true) {
 		system("cls");

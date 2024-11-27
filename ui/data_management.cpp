@@ -10,11 +10,18 @@
 #include "../structures/DB.h"
 
 using namespace std;
-
+/**
+ * Muestra un mensaje de advertencia acerca de los caracteres no admitidos en la entrada.
+ */
 void warningMessage() {
     std::cout << "ADEVERTENCIA:\nCaracteres no admitidos: !@#$%^&*+=~\\|\"'<>?/`" << std::endl;
 }
-
+/**
+ * Agrega un nuevo destino al grafo de viajes, solicitando el nombre del país, el punto de entrada y el tipo de entrada.
+ * Si el destino ya existe, se notifica al usuario.
+ *
+ * @param graph El grafo de viajes donde se agregará el destino.
+ */
 void addDestination(TravelGraph &graph) {
     string countryName;
     string ep_name;
@@ -46,6 +53,12 @@ void addDestination(TravelGraph &graph) {
     updateJSONDestinations(countryName, ep_name, ep_type,"../data/destinations.json");
 }
 
+/**
+ * Elimina todas las rutas que tienen un destino específico.
+ *
+ * @param graph El grafo de viajes que contiene las rutas.
+ * @param destinationSearched El destino cuyas rutas se eliminarán.
+ */
 void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
     for (Destination& destination : graph.destinations) {
         Route* currentRoute = destination.routes;
@@ -67,7 +80,12 @@ void deleteRoutes(TravelGraph &graph,Destination* destinationSearched) {
         }
     }
 }
-
+/**
+ * Muestra todas las rutas disponibles en el grafo de viajes.
+ * Si no hay destinos, se muestra un mensaje indicando que no hay destinos para mostrar.
+ *
+ * @param graph El grafo de viajes del que se mostrarán las rutas.
+ */
 void showRoutes(TravelGraph &graph) {
     system("cls");
     if (graph.destinations.getLength() < 1) {
@@ -120,7 +138,11 @@ void showRoutes(TravelGraph &graph) {
         }
     }
 }
-
+/**
+ * Elimina un destino del grafo de viajes. Si no hay destinos, muestra un mensaje indicando que no hay destinos para eliminar.
+ *
+ * @param graph El grafo de viajes del que se eliminará el destino.
+ */
 void deleteDestination(TravelGraph &graph) {
     if (graph.destinations.getLength() < 1) {
         cout << "No hay destinos para eliminar" << endl;
@@ -138,7 +160,12 @@ void deleteDestination(TravelGraph &graph) {
     graph.destinations.removeByIndex(index);
     DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
-
+/**
+ * Agrega una nueva ruta entre dos destinos, solicitando la información necesaria sobre los países, puntos de entrada,
+ * tiempo de viaje y método de transporte.
+ *
+ * @param graph El grafo de viajes donde se agregará la ruta.
+ */
 void addRoute(TravelGraph &graph) {
     cout << endl << " ================== Agregar ruta ==================" << endl;
     warningMessage();
@@ -168,7 +195,12 @@ void addRoute(TravelGraph &graph) {
     graph.addRoute(originCountry, originEntryPoint, destCountry, destEntryPoint, time, tmType);
     DB::saveDestinationsAndRoutes(R"(data\destinations.json)",graph);
 }
-
+/**
+ * Modifica una ruta existente, permitiendo al usuario cambiar los destinos, tiempo de viaje y método de transporte.
+ * Si la ruta es válida, la ruta original se elimina y se agrega la nueva.
+ *
+ * @param graph El grafo de viajes donde se modificará la ruta.
+ */
 void modifyRoute(TravelGraph &graph) {
     cout << endl << " ================== Modificar ruta ==================" << endl;
     vector<string> strRoutes;
@@ -233,6 +265,11 @@ void modifyRoute(TravelGraph &graph) {
     }
 }
 
+/**
+ * Elimina una ruta existente entre dos destinos. Si no hay rutas, se muestra un mensaje indicando que no hay rutas para eliminar.
+ *
+ * @param graph El grafo de viajes del que se eliminará la ruta.
+ */
 void deleteRoute(TravelGraph &graph) {
     system("cls");
     cout << endl << " ================== Eliminar ruta ==================" << endl;
@@ -274,6 +311,12 @@ void deleteRoute(TravelGraph &graph) {
     }
 }
 
+/**
+ * Agrega un nuevo cliente, verificando que el nombre no esté vacío y que el cliente no exista ya en la lista.
+ *
+ * @param clients La lista de clientes a la que se agregará el nuevo cliente.
+ * @param rewards La lista de recompensas asociadas a los clientes.
+ */
 void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     cout << endl << " ================== Agregar cliente ================== " << endl;
     warningMessage();
@@ -293,7 +336,12 @@ void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
         cout<<"Error: El nombre no puede estar vacio!\n";
     }
 }
-
+/**
+ * Elimina un cliente de la lista de clientes. Si no hay clientes registrados, se muestra un mensaje de advertencia.
+ *
+ * @param clients La lista de clientes de la que se eliminará el cliente.
+ * @param rewards La lista de recompensas asociadas a los clientes.
+ */
 void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     if (clients.getLength()== 0) {
         cout<<"No hay clientes resgistrados\n";
@@ -311,7 +359,12 @@ void deleteClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     clients.remove(*clients.get(index));
     DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 }
-
+/**
+ * Busca un cliente por nombre y muestra sus puntos acumulados si se encuentra.
+ *
+ * @param clients La lista de clientes donde se buscará al cliente.
+ * @param rewards La lista de recompensas asociadas a los clientes.
+ */
 void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     string name;
     cout << "Nombre del cliente a buscar: ";
@@ -326,6 +379,12 @@ void findClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     cout << "Cliente no encontrado." << endl;
 }
 
+/**
+ * Agrega una nueva recompensa, solicitando el nombre y los puntos requeridos. Si ya existe, se muestra un mensaje de advertencia.
+ *
+ * @param clients La lista de clientes a la que se asociarán las recompensas.
+ * @param rewards La lista de recompensas donde se agregará la nueva recompensa.
+ */
 void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     string strName;
     int points;
@@ -346,7 +405,12 @@ void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
         cout<<"Error: Datos incorrectos!\n";
     }
 }
-
+/**
+ * Modifica una recompensa existente, permitiendo cambiar su nombre y los puntos requeridos.
+ *
+ * @param clients La lista de clientes a la que se asociarán las recompensas.
+ * @param rewards La lista de recompensas donde se modificará la recompensa.
+ */
 void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     if (rewards.getLength() == 0) {
         cout<<"No hay premios disponibles\n";
@@ -377,7 +441,12 @@ void modifyReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
         cout<<"Error: Datos incorrectos!\n";
     }
 }
-
+/**
+ * Elimina una recompensa existente de la lista de recompensas. Si no hay recompensas disponibles, se muestra un mensaje de advertencia.
+ *
+ * @param clients La lista de clientes a la que se asociarán las recompensas.
+ * @param rewards La lista de recompensas donde se eliminará la recompensa.
+ */
 void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     if (rewards.getLength() == 0) {
         cout<<"No hay premios disponibles\n";
@@ -398,7 +467,14 @@ void deleteReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
 
 }
-
+/**
+ * Función principal para gestionar los datos de destinos, rutas, clientes y recompensas, presentando un menú al usuario.
+ * El menú permite agregar, eliminar, modificar y mostrar destinos, rutas, clientes y recompensas.
+ *
+ * @param graph El grafo de viajes que contiene los destinos y rutas.
+ * @param clients La lista de clientes registrados.
+ * @param rewards La lista de recompensas disponibles.
+ */
 void dataManagement(TravelGraph &graph, SimpleList<Client> &clients, SimpleList<Reward> &rewards) {
     while (true) {
         system("cls");
