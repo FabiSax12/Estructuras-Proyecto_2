@@ -1,6 +1,12 @@
 {
   "clientes": [
     {
+      "nombre": "Daniel Sanchez",
+      "premios": [],
+      "puntos": 0,
+      "viajes": []
+    },
+    {
       "nombre": "Maria Gomez",
       "premios": [],
       "puntos": 800,

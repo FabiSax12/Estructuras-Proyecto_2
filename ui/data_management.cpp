@@ -281,6 +281,12 @@ void addClient(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     cout << "Nombre del cliente: ";
     input(strName,{});
     if(!strName.empty()) {
+        for (auto &client : clients) {
+            if (client.name == strName) {
+                cout << "El cliente ya ha sido registrado, ingrese uno nuevo" << endl;
+                return;
+            }
+        }
         clients.add(Client(strName));
         DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
     }else {
@@ -328,6 +334,12 @@ void addReward(SimpleList<Client> &clients,SimpleList<Reward> &rewards) {
     cout<<"Puntos requeridos para canjear el premio: ";
     input(points,{});
     if(points>0&&!strName.empty()) {
+        for (auto &reward : rewards) {
+            if (reward.name == strName) {
+                cout << "El premio ya ha sido registrado, ingrese uno nuevo" << endl;
+                return;
+            }
+        }
         rewards.add(Reward(strName,points));
         DB::saveClientsAndRewards(R"(data\clients.json)",clients,rewards);
     }else {

@@ -41,9 +41,12 @@ inline void returnCursorPosition(COORD posText) {
 }
 
 inline void clearCinBuffer() {
+    // Comprobamos si hay datos disponibles en el búfer antes de limpiar
+    if (std::cin.rdbuf()->in_avail() > 0) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+    }
 }
+
 
 template <typename T>
 void input(T& value,std::vector<int> range) {
@@ -73,31 +76,33 @@ inline void input<int>(int& value,std::vector<int> range) {
     }
 }
 
-template<>
-inline void input<std::string>(std::string& value,std::vector<int> range) {
-    clearCinBuffer();
-    COORD posText = getCursorPosition(hConsole);
-    //cout<<"Caso:string";
-    string allowed = " .,;:-_()[]{}";
-    bool error = false;
-    std::string userValue;
-    while (true) {
-        std::getline(std::cin, userValue);
-        if (userValue.empty() || std::all_of(userValue.begin(), userValue.end(), [](unsigned char c) {return std::isspace(c);})) {
-            returnCursorPosition(posText);
-            continue;
-        }
-        for (char c : userValue) {
-            if (!std::isalnum(c) && allowed.find(c) == std::string::npos) {
-                error = true;
-            }
-        }
-        if (!error) {
-            value = userValue;
-            return;
-        }returnCursorPosition(posText);
+ template<>
+ inline void input<std::string>(std::string& value,std::vector<int> range) {
+     clearCinBuffer();
+     COORD posText = getCursorPosition(hConsole);
+     //cout<<"Caso:string";
+     string allowed = " .,;:-_()[]{}";
+     bool error = false;
+     std::string userValue;
+     while (true) {
+         std::getline(std::cin, userValue);
+          if (userValue.empty() || std::all_of(userValue.begin(), userValue.end(), [](unsigned char c) {return std::isspace(c);})) {
+              returnCursorPosition(posText);
+             continue;
+         }
+         for (char c : userValue) {
+             if (!std::isalnum(c) && allowed.find(c) == std::string::npos) {
+                 error = true;
+             }
+         }
+         if (!error) {
+             value = userValue;
+             return;
+         }returnCursorPosition(posText);
     }
-}
+ }
+
+
 
 template<>
 inline void input<double>(double& value,std::vector<int> range) {
